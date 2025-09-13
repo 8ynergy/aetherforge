@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://chikojyanhbus"]
+
+[node name="RockNode" type="Node2D"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctdulqvd4mmad"]
+
+[ext_resource type="Script" uid="uid://byrumueg4ds6y" path="res://scenes/main/Main.gd" id="1_u1xfj"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_u1xfj")
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="UIRoot"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Aetherforge (MVP boot)"
+
+[node name="WorldRoot" type="Node2D" parent="."]
+
+[node name="SystemsRoot" type="Node" parent="."]
+
+[node name="AudioRoot" type="Node" parent="."]
