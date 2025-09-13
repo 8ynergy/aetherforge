@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://chikojyanhbus"]
+
+[ext_resource type="Script" uid="uid://diix576pk0ut3" path="res://scenes/world/RockNode/RockNode.gd" id="1_vrqrj"]
+[ext_resource type="Texture2D" uid="uid://ck1cfeekkh3wo" path="res://scenes/world/RockNode/RockNode.png" id="2_hm7o2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vktr"]
+radius = 17.0294
+
+[node name="RockNode" type="Area2D"]
+script = ExtResource("1_vrqrj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hm7o2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2, 15)
+shape = SubResource("CircleShape2D_6vktr")

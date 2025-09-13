@@ -22,6 +22,12 @@ EventBus="*res://scripts/singletons/EventBus.gd"
 GameDB="*res://scripts/singletons/GameDB.gd"
 Balance="*res://scripts/singletons/Balance.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
