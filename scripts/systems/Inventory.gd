@@ -2,10 +2,15 @@ extends Node
 
 signal inventory_changed(id: String, qty: int)
 
-var credits := GameBalance.STARTING_CREDITS
-var capacity := GameBalance.INVENTORY_CAPACITY
+var credits := 0
+var capacity := 0
 var used := 0
 var stacks := {} # {id: qty}
+
+func _ready() -> void:
+	# Initialize inventory
+	capacity = Balance.get_inventory_capacity()
+	credits = Balance.get_starting_credits()
 
 func add(id: String, qty: int) -> int:
 	var space: int = max(capacity - used, 0)

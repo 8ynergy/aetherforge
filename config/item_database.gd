@@ -8,6 +8,28 @@ const SHOP_OFFERS = {
 const ITEM_IDS = {
 	"stone": "stone",
 	"stone_bar": "stone_bar", 
-	"stone_basic": "stone_basic",
+	"coal": "coal",
+	"tin": "tin",
+	"copper": "copper",
+	"iron": "iron",
+	"silver": "silver",
+	"gold": "gold",
+	"platinum": "platinum",
+	"titanium": "titanium",
+	"crystal": "crystal",
 	"credits": "credits"
+}
+
+# Resource node types for easy reference
+const RESOURCE_TYPES = {
+	"stone": "stone",
+	"coal": "coal",
+	"tin": "tin",
+	"copper": "copper",
+	"iron": "iron",
+	"silver": "silver",
+	"gold": "gold",
+	"platinum": "platinum",
+	"titanium": "titanium",
+	"crystal": "crystal"
 }

@@ -3,9 +3,11 @@ extends Node
 signal smelt_complete(item: String, qty: int)
 
 var queue: Array = [] # Array[Dictionary] e.g. [{id:"stone", in:10, out:"stone_bar", out_qty:1, time:2.0, t:0}]
-const RECIPE := GameBalance.SMELT_RECIPES
+# Will be initialized in _ready()
+var RECIPE: Dictionary
 
 func _ready() -> void:
+	RECIPE = Balance.get_smelt_recipes()
 	set_process(true)
 
 func enqueue(item: String, qty_in: int) -> bool:

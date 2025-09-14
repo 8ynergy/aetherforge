@@ -30,16 +30,17 @@ func load_game() -> void:
 	_apply_drones(int(data.get(SaveSettings.SAVE_KEYS.drones, 0)))
 
 func _count_drones() -> int:
-	var world = get_tree().get_current_scene().get_node("WorldRoot")
-	return world.get_children().filter(func(c): return c is Node2D and c.name.begins_with(SaveSettings.DRONE_NAME_PREFIX)).size()
+	# Count drones using the group system instead of name checking
+	return get_tree().get_nodes_in_group("drones").size()
 	
 func _apply_inventory(inv: Dictionary) -> void:
 	var inv_node = get_tree().get_first_node_in_group("inventory")
 	if inv_node == null: return
 	inv_node.stacks = inv.get(SaveSettings.SAVE_KEYS.stacks, {})
-	inv_node.used = int(inv.get(SaveSettings.SAVE_KEYS.used, GameBalance.SAVE_DEFAULTS.inventory_used))
-	inv_node.capacity = int(inv.get(SaveSettings.SAVE_KEYS.capacity, GameBalance.SAVE_DEFAULTS.inventory_capacity))
-	inv_node.credits = int(inv.get(SaveSettings.SAVE_KEYS.credits, GameBalance.SAVE_DEFAULTS.inventory_credits))
+	var defaults = Balance.get_save_defaults()
+	inv_node.used = int(inv.get(SaveSettings.SAVE_KEYS.used, defaults.inventory_used))
+	inv_node.capacity = int(inv.get(SaveSettings.SAVE_KEYS.capacity, defaults.inventory_capacity))
+	inv_node.credits = int(inv.get(SaveSettings.SAVE_KEYS.credits, defaults.inventory_credits))
 	
 	# Emit signals to update the UI
 	inv_node.emit_signal("inventory_changed", "credits", inv_node.credits)
