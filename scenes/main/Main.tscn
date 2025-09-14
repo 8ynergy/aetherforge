@@ -36,10 +36,10 @@ offset_bottom = 23.0
 [node name="MineLayer" type="Node2D" parent="WorldRoot"]
 
 [node name="RockNode" parent="WorldRoot/MineLayer" instance=ExtResource("4_1rhdn")]
-position = Vector2(341, 234)
+position = Vector2(240, 224)
 
 [node name="Smelter" parent="WorldRoot" instance=ExtResource("4_dc040")]
-position = Vector2(407, 49)
+position = Vector2(1182, 52)
 
 [node name="SystemsRoot" type="Node" parent="."]
 
