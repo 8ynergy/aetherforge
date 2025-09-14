@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvl2t53ca1axs"]
+
+[ext_resource type="Script" uid="uid://bx647f4gchrdv" path="res://scenes/world/CopperNode/CopperNode.gd" id="1_e30ht"]
+[ext_resource type="Texture2D" uid="uid://bdisq60guiyg7" path="res://scenes/world/CopperNode/CopperNode.png" id="2_6mb13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hjqs"]
+radius = 17.1172
+
+[node name="CopperNode" type="Area2D"]
+script = ExtResource("1_e30ht")
+metadata/_custom_type_script = "uid://brn8rwmm7en3v"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6mb13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 17)
+shape = SubResource("CircleShape2D_4hjqs")

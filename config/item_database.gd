@@ -16,7 +16,7 @@ const ITEM_IDS = {
 	"gold": "gold",
 	"platinum": "platinum",
 	"titanium": "titanium",
-	"crystal": "crystal",
+	"diamond": "diamond",
 	"credits": "credits"
 }
 
@@ -31,5 +31,5 @@ const RESOURCE_TYPES = {
 	"gold": "gold",
 	"platinum": "platinum",
 	"titanium": "titanium",
-	"crystal": "crystal"
+	"diamond": "diamond"
 }

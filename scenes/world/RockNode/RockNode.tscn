@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ck1cfeekkh3wo" path="res://scenes/world/RockNode/RockNode.png" id="2_hm7o2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6vktr"]
-radius = 17.0294
+radius = 18.0278
 
 [node name="RockNode" type="Area2D"]
 script = ExtResource("1_vrqrj")

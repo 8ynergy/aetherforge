@@ -15,10 +15,10 @@ const STARTING_CREDITS = 100
 const CLICK_BASE_DAMAGE = 1.0
 
 # Resource node settings
-# Order: Crystal, Titanium, Platinum, Gold, Silver, Iron, Copper, Tin, Coal, Rock
+# Order: Diamond, Titanium, Platinum, Gold, Silver, Iron, Copper, Tin, Coal, Rock
 # Each is 2 HP more than the next in the sequence (reversed)
 const RESOURCE_NODE_SETTINGS = {
-	"crystal": {"max_hp": 20, "resource_amount": 1},
+	"diamond": {"max_hp": 20, "resource_amount": 1},
 	"titanium": {"max_hp": 18, "resource_amount": 1},
 	"platinum": {"max_hp": 16, "resource_amount": 1},
 	"gold": {"max_hp": 14, "resource_amount": 1},	
