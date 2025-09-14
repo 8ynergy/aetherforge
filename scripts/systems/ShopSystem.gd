@@ -3,9 +3,7 @@ extends Node
 signal purchase_succeeded(id: String)
 signal purchase_failed(id: String, reason: String)
 
-const OFFERS := {
-	"miner_bot_mk1": {"cost": 50}
-}
+const OFFERS := ItemDatabase.SHOP_OFFERS
 
 func _ready() -> void:
 	purchase_succeeded.connect(_on_purchase)
@@ -27,7 +25,7 @@ func buy(id: String) -> void:
 	print("Purchase succeeded!")  # DEBUG: should appear in Output
 
 func _on_purchase(id: String) -> void:
-	if id == "miner_bot_mk1":
+	if id == "mining_drone_mk1":
 		var mgr = get_tree().root.find_child("DroneManager", true, false)
 		if mgr:
-			mgr.spawn_MiningDrone()
+			mgr.spawn_mining_drone()

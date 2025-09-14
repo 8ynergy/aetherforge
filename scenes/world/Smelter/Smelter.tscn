@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgxu4xecgkssw"]
 
-[ext_resource type="Script" uid="uid://cb8d8ykiyoj34" path="res://scenes/world/Smelter/SmelterSystem.gd" id="1_1itvp"]
+[ext_resource type="Script" uid="uid://cb8d8ykiyoj34" path="res://scripts/systems/SmelterSystem.gd" id="1_1itvp"]
 [ext_resource type="Texture2D" uid="uid://ccwpevn6wl5kp" path="res://scenes/world/Smelter/Smelter.png" id="2_gu0sh"]
 
 [node name="Smelter" type="Node2D"]

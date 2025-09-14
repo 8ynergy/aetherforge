@@ -7,7 +7,9 @@ extends Control
 
 # BUTTONS
 @onready var smelt_btn := Button.new()
-@onready var buy_bot_btn := Button.new()
+@onready var buy_drone_btn := Button.new()
+@onready var save_btn := Button.new()
+@onready var load_btn := Button.new()
 
 var _inv: Node = null
 
@@ -26,11 +28,17 @@ func _ready() -> void:
 	# BUTTONS
 	smelt_btn.text = "Smelt 10 Stone (10)"
 	smelt_btn.position = Vector2(8, 64)
-	buy_bot_btn.text = "Buy Miner Bot ($50)"
-	buy_bot_btn.position = Vector2(8, 96)
+	buy_drone_btn.text = "Buy Mining Drone ($50)"
+	buy_drone_btn.position = Vector2(8, 96)
+	save_btn.text = "Save"
+	save_btn.position = Vector2(8, 128)
+	load_btn.text = "Load"
+	load_btn.position = Vector2(70, 128)
 	
 	add_child(smelt_btn)
-	add_child(buy_bot_btn)
+	add_child(buy_drone_btn)
+	add_child(save_btn)
+	add_child(load_btn)
 	
 	_bind_inventory()
 	_refresh_all()
@@ -43,10 +51,20 @@ func _ready() -> void:
 			print("Failed to enqueue (not enough stone or Smelter not found)")
 	)
 	
-	buy_bot_btn.pressed.connect(func():
+	buy_drone_btn.pressed.connect(func():
 		var shop = get_tree().root.find_child("ShopSystem", true, false)
 		if shop:
-			shop.buy("miner_bot_mk1")
+			shop.buy("mining_drone_mk1")
+	)
+	
+	save_btn.pressed.connect(func():
+		var saver = get_tree().root.find_child("SaveSys", true, false)
+		if saver: saver.save_game()
+	)
+	
+	load_btn.pressed.connect(func():
+		var saver = get_tree().root.find_child("SaveSys", true, false)
+		if saver: saver.load_game()
 	)
 	
 func _bind_inventory() -> void:

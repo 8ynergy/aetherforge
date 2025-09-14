@@ -1,7 +1,7 @@
 extends Area2D
 
-@export var max_hp: int = 2
-var hp: int = 2
+@export var max_hp: int = GameBalance.ROCK_MAX_HP
+var hp: int = GameBalance.ROCK_MAX_HP
 
 signal rock_broken(table_id: String)
 

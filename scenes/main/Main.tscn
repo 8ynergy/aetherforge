@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ctdulqvd4mmad"]
+[gd_scene load_steps=10 format=4 uid="uid://ctdulqvd4mmad"]
 
 [ext_resource type="Script" uid="uid://byrumueg4ds6y" path="res://scenes/main/Main.gd" id="1_u1xfj"]
 [ext_resource type="TileSet" uid="uid://cih6puxhlfcoe" path="res://assets/GroundTileSet.tres" id="2_1rhdn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d3bstit6fv6hy" path="res://scripts/systems/Inventory.gd" id="4_gyg6b"]
 [ext_resource type="Script" uid="uid://img3qq46vvag" path="res://scripts/systems/ShopSystem.gd" id="7_sjxhf"]
 [ext_resource type="Script" uid="uid://but56r6be2383" path="res://scripts/systems/DroneManager.gd" id="8_ko0rf"]
+[ext_resource type="Script" uid="uid://bj8uneces24u8" path="res://scripts/systems/SaveSys.gd" id="9_ostsq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_u1xfj")
@@ -50,5 +51,8 @@ script = ExtResource("7_sjxhf")
 
 [node name="DroneManager" type="Node" parent="SystemsRoot"]
 script = ExtResource("8_ko0rf")
+
+[node name="SaveSys" type="Node" parent="SystemsRoot"]
+script = ExtResource("9_ostsq")
 
 [node name="AudioRoot" type="Node" parent="."]
