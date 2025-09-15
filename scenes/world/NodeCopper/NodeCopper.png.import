@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmaw45ovaj2gk"
-path="res://.godot/imported/TinNode.png-50caaf10e21de87ee27cdcf947e4ae99.ctex"
+uid="uid://bdisq60guiyg7"
+path="res://.godot/imported/NodeCopper.png-413e79870dd57c73172be4fde10e2c50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/TinNode/TinNode.png"
-dest_files=["res://.godot/imported/TinNode.png-50caaf10e21de87ee27cdcf947e4ae99.ctex"]
+source_file="res://scenes/world/NodeCopper/NodeCopper.png"
+dest_files=["res://.godot/imported/NodeCopper.png-413e79870dd57c73172be4fde10e2c50.ctex"]
 
 [params]
 

@@ -1,3 +1,60 @@
-[gd_scene format=3 uid="uid://dct4u3a48o5ch"]
+[gd_scene load_steps=2 format=3 uid="uid://dct4u3a48o5ch"]
 
-[node name="Hud" type="Node2D"]
+[ext_resource type="Script" uid="uid://dnivntv77ue5" path="res://scenes/ui/HUD.gd" id="1_kw0id"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kw0id")
+
+[node name="CreditsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 3.0
+offset_right = 823.0
+offset_bottom = 26.0
+text = "CreditsLabel"
+
+[node name="StoneLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 728.0
+offset_top = 29.0
+offset_right = 814.0
+offset_bottom = 52.0
+text = "StoneLabel"
+
+[node name="BarLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 729.0
+offset_top = 55.0
+offset_right = 798.0
+offset_bottom = 78.0
+text = "BarLabel"
+
+[node name="SmeltButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1069.0
+offset_top = 49.0
+offset_right = 1225.0
+offset_bottom = 80.0
+text = "Smelt 10 Stone (10)"
+
+[node name="BuyDroneButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1067.0
+offset_top = 11.0
+offset_right = 1256.0
+offset_bottom = 42.0
+text = "Buy Mining Drone ($50)"
+
+[node name="PauseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1150.0
+offset_top = 685.0
+offset_right = 1258.0
+offset_bottom = 716.0
+text = "PauseButton"

@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://cortby4orjd3l"]
+
+[ext_resource type="Script" uid="uid://dnplpdeavg8yj" path="res://scenes/ui/PauseMenu.gd" id="1_v5pi0"]
+[ext_resource type="Script" uid="uid://d0rkqap6vjcpq" path="res://scenes/ui/SaveButton.gd" id="2_v5pi0"]
+[ext_resource type="Script" uid="uid://t1ght6kc5cah" path="res://scenes/ui/LoadButton.gd" id="3_cctyv"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v5pi0")
+
+[node name="Tint" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.345098)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -68.0
+offset_right = 62.5
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(125, 136)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save"
+script = ExtResource("2_v5pi0")
+
+[node name="LoadButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load"
+script = ExtResource("3_cctyv")
+
+[node name="QuitToMainMenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"

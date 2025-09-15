@@ -11,6 +11,9 @@ func _ready() -> void:
 	# Initialize inventory
 	capacity = Balance.get_inventory_capacity()
 	credits = Balance.get_starting_credits()
+	
+	# Emit signal to notify HUD of initial values
+	emit_signal("inventory_changed", "credits", credits)
 
 func add(id: String, qty: int) -> int:
 	var space: int = max(capacity - used, 0)

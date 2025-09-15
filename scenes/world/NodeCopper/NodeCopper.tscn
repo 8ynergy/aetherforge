@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://vnlavkveefc6"]
+
+[ext_resource type="Script" path="res://scenes/world/NodeCopper/NodeCopper.gd" id="1_lh087"]
+[ext_resource type="Texture2D" uid="uid://bdisq60guiyg7" path="res://scenes/world/NodeCopper/NodeCopper.png" id="2_6mb13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hjqs"]
+radius = 17.1172
+
+[node name="NodeCopper" type="Area2D"]
+script = ExtResource("1_lh087")
+metadata/_custom_type_script = "uid://brn8rwmm7en3v"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6mb13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17)
+shape = SubResource("CircleShape2D_4hjqs")

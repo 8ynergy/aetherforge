@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do1omqq6wurex"
-path="res://.godot/imported/DiamondNode.png-adbd394a64f46f42c1cb79c3f8476195.ctex"
+uid="uid://bvhe6dsbt5cwg"
+path="res://.godot/imported/CoffeeCup.png-746b28c713022725da7e9f0d054b5834.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/world/DiamondNode/DiamondNode.png"
-dest_files=["res://.godot/imported/DiamondNode.png-adbd394a64f46f42c1cb79c3f8476195.ctex"]
+source_file="res://scenes/world/CoffeeCup/CoffeeCup.png"
+dest_files=["res://.godot/imported/CoffeeCup.png-746b28c713022725da7e9f0d054b5834.ctex"]
 
 [params]
 

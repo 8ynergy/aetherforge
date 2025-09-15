@@ -2,7 +2,7 @@ class_name ResourceNode
 extends Area2D
 
 @export var max_hp: int = 2
-@export var resource_type: String = "stone"
+@export var resource_type: String
 @export var resource_amount: int = 1
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -40,7 +40,12 @@ func _show_hit_effect() -> void:
 		print("Tween is null. Failed to create tween!")
 		return
 	
-	tween.tween_property(sprite, "modulate:v", 1, 0.25).from(15)
+	# Get configurable hit effect settings
+	var settings = Balance.get_hit_effect_settings()
+	var duration = Balance.get_hit_effect_duration()  # Can be modified by speed multiplier later
+	
+	# Flash white on hit: brighten sprite to max brightness, then fade to normal over configurable duration
+	tween.tween_property(sprite, "modulate:v", settings.brightness_end, duration).from(settings.brightness_start)
 
 func _deplete() -> void:
 	emit_signal("resource_depleted", self, resource_type, resource_amount)

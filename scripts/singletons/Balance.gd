@@ -14,6 +14,13 @@ const STARTING_CREDITS = 100
 # Combat settings
 const CLICK_BASE_DAMAGE = 1.0
 
+# Visual effects settings
+const HIT_EFFECT_SETTINGS = {
+	"brightness_start": 15.0,	# Initial brightness for white flash
+	"brightness_end": 1.0,	   # Final brightness (normal)
+	"duration_base": 0.25		# Base duration in seconds
+}
+
 # Resource node settings
 # Order: Diamond, Titanium, Platinum, Gold, Silver, Iron, Copper, Tin, Coal, Rock
 # Each is 2 HP more than the next in the sequence (reversed)
@@ -30,7 +37,7 @@ const RESOURCE_NODE_SETTINGS = {
 	"stone": {"max_hp": 2, "resource_amount": 1}
 }
 
-# Smelting settings
+# Smelter settings
 const SMELT_RECIPES = {
 	"stone": {"cost": 10, "out": "stone_bar", "out_qty": 1, "time": 2.0}
 }
@@ -52,3 +59,11 @@ func get_starting_credits() -> int:
 
 func get_inventory_capacity() -> int:
 	return INVENTORY_CAPACITY
+
+func get_hit_effect_duration(speed_multiplier: float = 1.0) -> float:
+	"""Get hit effect duration, optionally modified by speed multiplier"""
+	return HIT_EFFECT_SETTINGS.duration_base / speed_multiplier
+
+func get_hit_effect_settings() -> Dictionary:
+	"""Get all hit effect settings"""
+	return HIT_EFFECT_SETTINGS

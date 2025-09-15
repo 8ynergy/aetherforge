@@ -6,7 +6,7 @@ const DRONE_SCENES = {
 }
 
 const WORLD_SCENES = {
-	"rock_node": "res://scenes/world/RockNode/RockNode.tscn",
+	"rock_node": "res://scenes/world/NodeRock/NodeRock.tscn",
 	"smelter": "res://scenes/world/Smelter/Smelter.tscn"
 }
 
