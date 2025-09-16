@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://rtn2ess0qjq5"]
+
+[ext_resource type="Shader" uid="uid://cgfyum82gbkxe" path="res://scenes/ui/OnHoverShader.gdshader" id="1_3vl7j"]
+
+[resource]
+shader = ExtResource("1_3vl7j")
+shader_parameter/OnHoverShader = false
+shader_parameter/glow_size = 3.0
+shader_parameter/glow_color = Color(1, 1, 1, 0.8)

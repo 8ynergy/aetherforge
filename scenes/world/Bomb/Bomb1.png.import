@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://dhuu6xvym4mql"
+path="res://.godot/imported/Bomb1.png-da939be2aa3967e533ec99e383a6ceb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/Bomb/Bomb1.png"
+dest_files=["res://.godot/imported/Bomb1.png-da939be2aa3967e533ec99e383a6ceb1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://odwyo7hsumdc"
+path="res://.godot/imported/PortaPotty.png-5d665daeababc5c68ce0a8530106c1e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/PortaPotty/PortaPotty.png"
+dest_files=["res://.godot/imported/PortaPotty.png-5d665daeababc5c68ce0a8530106c1e1.ctex"]
 
 [params]
 

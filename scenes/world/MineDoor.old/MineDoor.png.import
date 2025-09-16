@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://xbhso7wr17qs"
+path="res://.godot/imported/MineDoor.png-f528a36b01f27bf8870f0f05ce75f5bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/MineDoor.old/MineDoor.png"
+dest_files=["res://.godot/imported/MineDoor.png-f528a36b01f27bf8870f0f05ce75f5bd.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://c3u4qjc362ae5"
+path="res://.godot/imported/ClothesHanging2.png-d4039c3e73c1400513a4ee8ba0f5f313.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/ClothesHanging/ClothesHanging2.png"
+dest_files=["res://.godot/imported/ClothesHanging2.png-d4039c3e73c1400513a4ee8ba0f5f313.ctex"]
 
 [params]
 

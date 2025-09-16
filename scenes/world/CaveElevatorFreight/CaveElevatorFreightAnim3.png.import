@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://0p42x0ejpaku"
+path="res://.godot/imported/CaveElevatorFreightAnim3.png-97ce5f78f968687c20c96333e0287eb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/CaveElevatorFreight/CaveElevatorFreightAnim3.png"
+dest_files=["res://.godot/imported/CaveElevatorFreightAnim3.png-97ce5f78f968687c20c96333e0287eb1.ctex"]
 
 [params]
 

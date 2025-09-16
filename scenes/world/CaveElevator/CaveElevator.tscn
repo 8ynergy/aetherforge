@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsctrygw2poyd"]
+[gd_scene load_steps=5 format=3 uid="uid://bsctrygw2poyd"]
 
+[ext_resource type="Script" uid="uid://co6bxs6rnvove" path="res://scenes/world/CaveElevator/CaveElevator.gd" id="1_8bbvl"]
 [ext_resource type="Texture2D" uid="uid://ck2quqj4rqu8" path="res://scenes/world/CaveElevator/CaveElevatorClosed.png" id="1_i68lf"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="2_8bbvl"]
 
-[node name="CaveElevator" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d87w"]
+size = Vector2(68, 66)
+
+[node name="CaveElevator" type="Area2D"]
+script = ExtResource("1_8bbvl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8d87w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_8bbvl")
 texture = ExtResource("1_i68lf")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

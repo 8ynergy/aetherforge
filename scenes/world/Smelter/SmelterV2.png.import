@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://c0sivvjalc3q4"
+path="res://.godot/imported/SmelterV2.png-c03b2b3af5554338b62f9a518d8920ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/Smelter/SmelterV2.png"
+dest_files=["res://.godot/imported/SmelterV2.png-c03b2b3af5554338b62f9a518d8920ed.ctex"]
 
 [params]
 

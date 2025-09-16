@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://civqxycarf7p5"
+path="res://.godot/imported/WellEmpty.png-0a13c750d1a9dd1a1ea7bf89e142dcbb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/Well/WellEmpty.png"
+dest_files=["res://.godot/imported/WellEmpty.png-0a13c750d1a9dd1a1ea7bf89e142dcbb.ctex"]
 
 [params]
 

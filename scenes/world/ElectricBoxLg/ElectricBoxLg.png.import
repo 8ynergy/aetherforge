@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://cw0ho4time3oe"
+path="res://.godot/imported/ElectricBoxLg.png-6c798550b5c89c53a60b69a412bb4568.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/ElectricBoxLg/ElectricBoxLg.png"
+dest_files=["res://.godot/imported/ElectricBoxLg.png-6c798550b5c89c53a60b69a412bb4568.ctex"]
 
 [params]
 

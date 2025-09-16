@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://bq7tvhrf548p3"
+path="res://.godot/imported/Crabs.png-4ce6dfd6025354fc0f0d3189cd2ed08a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/Crabs/Crabs.png"
+dest_files=["res://.godot/imported/Crabs.png-4ce6dfd6025354fc0f0d3189cd2ed08a.ctex"]
 
 [params]
 

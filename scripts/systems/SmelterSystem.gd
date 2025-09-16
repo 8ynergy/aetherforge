@@ -19,7 +19,7 @@ func enqueue(item: String, qty_in: int) -> bool:
 	if inv.get_qty(item) < qty_in: 
 		return false
 	
-	# remove inputs	
+	# remove inputs
 	inv.add(item, -qty_in)
 	
 	var r: Dictionary = RECIPE[item]

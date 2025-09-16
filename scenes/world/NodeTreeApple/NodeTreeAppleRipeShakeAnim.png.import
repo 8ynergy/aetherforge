@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://bwp0ppt2jt67w"
+path="res://.godot/imported/NodeTreeAppleRipeShakeAnim.png-0785dc17cfbbd507eed3b72c530468fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/NodeTreeApple/NodeTreeAppleRipeShakeAnim.png"
+dest_files=["res://.godot/imported/NodeTreeAppleRipeShakeAnim.png-0785dc17cfbbd507eed3b72c530468fd.ctex"]
 
 [params]
 

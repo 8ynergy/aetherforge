@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://88gncewdopon"
-path="res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"
+uid="uid://c1fh4ic3sppo4"
+path="res://.godot/imported/SleepingBag.png-165e64dcfd490f0cedf8e5df42270299.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GroundTileSet.png"
-dest_files=["res://.godot/imported/GroundTileSet.png-33a290a6912ef36a86e5bc79deff7e34.ctex"]
+source_file="res://scenes/world/SleepingBag/SleepingBag.png"
+dest_files=["res://.godot/imported/SleepingBag.png-165e64dcfd490f0cedf8e5df42270299.ctex"]
 
 [params]
 
