@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://rtn2ess0qjq5"]
 
-[ext_resource type="Shader" uid="uid://cgfyum82gbkxe" path="res://scenes/ui/OnHoverShader.gdshader" id="1_3vl7j"]
+[ext_resource type="Shader" uid="uid://ju06omv7ykk8" path="res://scenes/world/PortaPotty/PortaPotty.gdshader" id="1_3vl7j"]
 
 [resource]
 shader = ExtResource("1_3vl7j")

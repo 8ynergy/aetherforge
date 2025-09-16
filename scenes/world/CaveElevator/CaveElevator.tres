@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dc4wh6h7yihat"]
+
+[ext_resource type="Shader" uid="uid://s4qflk0d5i5f" path="res://scenes/world/CaveElevator/CaveElevator.gdshader" id="1_qe0tv"]
+
+[resource]
+shader = ExtResource("1_qe0tv")
+shader_parameter/OnHoverShader = false
+shader_parameter/glow_size = 3.0
+shader_parameter/glow_color = Color(1, 1, 1, 0.8)

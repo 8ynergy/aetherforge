@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0ngph0f6jcdy"]
+
+[ext_resource type="Shader" uid="uid://ju06omv7ykk8" path="res://scenes/world/PortaPotty/PortaPotty.gdshader" id="1_5n4pm"]
+
+[resource]
+shader = ExtResource("1_5n4pm")
+shader_parameter/OnHoverShader = false
+shader_parameter/glow_size = 3.0
+shader_parameter/glow_color = Color(1, 1, 1, 0.8)
