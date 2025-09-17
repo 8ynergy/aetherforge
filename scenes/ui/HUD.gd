@@ -6,7 +6,7 @@ extends Control
 @onready var bar_label: Label = $BarLabel
 @onready var smelt_btn: Button = $SmeltButton
 @onready var buy_drone_btn: Button = $BuyDroneButton
-@onready var pause_btn: Button = $PauseButton
+@onready var menu_btn: Button = $MenuButton
 
 var _inv: Node = null
 
@@ -18,17 +18,17 @@ func _ready() -> void:
 		smelt_btn.pressed.connect(_on_smelt_pressed)
 	if buy_drone_btn:
 		buy_drone_btn.pressed.connect(_on_buy_drone_pressed)
-	if pause_btn:
-		pause_btn.pressed.connect(_on_pause_pressed)
+	if menu_btn:
+		menu_btn.pressed.connect(_on_menu_pressed)
 	
 	_bind_inventory()
 	_refresh_all()
 
-func _on_pause_pressed():
-	# Find the pause menu in the scene tree
-	var pause_menu = get_tree().get_first_node_in_group("pause_menu")
-	if pause_menu:
-		pause_menu.toggle_pause_menu()
+func _on_menu_pressed():
+	# Find the menu in the scene tree
+	var menu = get_tree().get_first_node_in_group("menu")
+	if menu:
+		menu.toggle_menu()
 
 func _on_smelt_pressed():
 	var smelter = get_tree().root.find_child("Smelter", true, false)

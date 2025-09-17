@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ctdulqvd4mmad"]
+[gd_scene load_steps=14 format=4 uid="uid://ctdulqvd4mmad"]
 
 [ext_resource type="Script" uid="uid://byrumueg4ds6y" path="res://scenes/main/Main.gd" id="1_u1xfj"]
 [ext_resource type="TileSet" uid="uid://fsfqk35b2s0t" path="res://assets/GroundTileSet.tres" id="2_1rhdn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://img3qq46vvag" path="res://scripts/systems/ShopSystem.gd" id="7_sjxhf"]
 [ext_resource type="PackedScene" uid="uid://chikojyanhbus" path="res://scenes/world/NodeRock/NodeRock.tscn" id="8_2tpxt"]
 [ext_resource type="Script" uid="uid://but56r6be2383" path="res://scripts/systems/DroneManager.gd" id="8_ko0rf"]
+[ext_resource type="PackedScene" uid="uid://c2guffb653pxe" path="res://scenes/world/CaveElevatorFreight/CaveElevatorFreight.tscn" id="9_2tpxt"]
 [ext_resource type="Script" uid="uid://bj8uneces24u8" path="res://scripts/systems/SaveSys.gd" id="9_ostsq"]
 
 [node name="Main" type="Node2D"]
@@ -40,10 +41,13 @@ position = Vector2(1173, 151)
 position = Vector2(646, 150)
 
 [node name="NodeCopper" parent="WorldRoot" instance=ExtResource("7_p5fgu")]
-position = Vector2(364, 335)
+position = Vector2(560, 184)
 
 [node name="NodeRock" parent="WorldRoot" instance=ExtResource("8_2tpxt")]
-position = Vector2(286, 332)
+position = Vector2(512, 184)
+
+[node name="CaveElevatorFreight" parent="WorldRoot" instance=ExtResource("9_2tpxt")]
+position = Vector2(784, 152)
 
 [node name="SystemsRoot" type="Node" parent="."]
 

@@ -131,7 +131,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_equ67"]
-size = Vector2(60, 104)
+size = Vector2(60, 100)
 
 [node name="PortaPotty" type="Area2D"]
 script = ExtResource("1_1fhj1")
@@ -140,6 +140,7 @@ script = ExtResource("1_1fhj1")
 z_index = 1
 material = ExtResource("2_1fhj1")
 texture = ExtResource("1_equ67")
+offset = Vector2(0, -50)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -147,9 +148,10 @@ material = ExtResource("2_1fhj1")
 position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_1kwtn")
 animation = &"Open"
+offset = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_equ67")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

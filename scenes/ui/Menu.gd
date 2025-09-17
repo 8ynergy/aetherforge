@@ -5,8 +5,7 @@ signal quit_to_main_menu_requested
 
 func _ready():
 	visible = false
-	add_to_group("pause_menu")
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	add_to_group("menu")
 	
 	# Connect button signals directly
 	var resume_btn = get_node("MarginContainer/VBoxContainer/ResumeButton")
@@ -17,22 +16,20 @@ func _ready():
 	if quit_btn:
 		quit_btn.pressed.connect(_on_quit_pressed)
 
-func show_pause_menu():
+func show_menu():
 	visible = true
-	get_tree().paused = true
 
-func hide_pause_menu():
+func hide_menu():
 	visible = false
-	get_tree().paused = false
 
-func toggle_pause_menu():
+func toggle_menu():
 	if visible:
-		hide_pause_menu()
+		hide_menu()
 	else:
-		show_pause_menu()
+		show_menu()
 
 func _on_resume_pressed():
-	hide_pause_menu()
+	hide_menu()
 	resume_requested.emit()
 
 func _on_quit_pressed():

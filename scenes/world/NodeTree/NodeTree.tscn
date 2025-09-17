@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxj0ue7nxvp7b"]
+
+[ext_resource type="Texture2D" uid="uid://d4mxu12g15kgt" path="res://scenes/world/NodeTreeApple/NodeTreeAppleEmpty.png" id="1_5hcvg"]
+[ext_resource type="Texture2D" uid="uid://dywtgtr03w47a" path="res://scenes/world/NodeTreeApple/NodeTreeAppleEmptyShakeAnim.png" id="2_kmk6d"]
+[ext_resource type="Texture2D" uid="uid://ylc5esp3dp33" path="res://scenes/world/NodeTree/NodeTreeEmptyShakeAnim.png" id="2_uacyf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kvat"]
+atlas = ExtResource("2_uacyf")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkd3d"]
+atlas = ExtResource("2_uacyf")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii1p5"]
+atlas = ExtResource("2_uacyf")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciahb"]
+atlas = ExtResource("2_kmk6d")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaf5v"]
+atlas = ExtResource("2_kmk6d")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvd14"]
+atlas = ExtResource("2_kmk6d")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ib03c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kvat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkd3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii1p5")
+}],
+"loop": false,
+"name": &"EmptyHover",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciahb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kaf5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvd14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kaf5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvd14")
+}],
+"loop": false,
+"name": &"EmptyShake",
+"speed": 7.0
+}]
+
+[node name="NodeTree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5hcvg")
+offset = Vector2(0, -64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ib03c")
+animation = &"EmptyHover"
+frame = 2
+frame_progress = 1.0
+offset = Vector2(0, -64)

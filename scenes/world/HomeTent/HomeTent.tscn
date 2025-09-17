@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bej5csuftm6nl"]
-
-[ext_resource type="Texture2D" uid="uid://llej061x08yu" path="res://scenes/world/HomeTent/HomeTent.png" id="1_vdbww"]
-
-[node name="HomeTent" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vdbww")

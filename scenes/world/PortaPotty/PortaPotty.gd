@@ -151,7 +151,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			anim.hide()
 			print("Animation hidden.")
 			static_sprite.texture = opened_texture
-			static_sprite.position.y += 16
+			static_sprite.position.y += 34
 			static_sprite.show()
 			print("Showing static Opened texture.")
 
@@ -165,6 +165,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			anim.hide()
 			print("Animation hidden.")
 			static_sprite.texture = closed_texture
-			static_sprite.position.y -= 16
+			static_sprite.position.y -= 34
 			static_sprite.show()
 			print("Showing static Closed texture.")

@@ -14,5 +14,6 @@ metadata/_custom_type_script = "uid://brn8rwmm7en3v"
 texture = ExtResource("2_6mb13")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 17)
 shape = SubResource("CircleShape2D_4hjqs")

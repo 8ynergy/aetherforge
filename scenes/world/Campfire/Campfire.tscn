@@ -6,4 +6,6 @@
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_sruaf")
+autoplay = "default"
 frame_progress = 0.472193
+offset = Vector2(0, -24)

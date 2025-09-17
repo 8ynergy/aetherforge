@@ -215,6 +215,7 @@ sprite_frames = SubResource("SpriteFrames_vx5wc")
 animation = &"OpenUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_8d87w")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
