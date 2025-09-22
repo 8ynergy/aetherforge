@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cb4a4861erc2w"]
+
+[node name="SignLeft" type="Area2D"]

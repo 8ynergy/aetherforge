@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0mvt54owk7y2"]
+
+[ext_resource type="PackedScene" uid="uid://dct4u3a48o5ch" path="res://scenes/ui/HUD.tscn" id="1_8nt4l"]
+
+[node name="CrashShip" type="Node2D"]
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UIRoot" instance=ExtResource("1_8nt4l")]

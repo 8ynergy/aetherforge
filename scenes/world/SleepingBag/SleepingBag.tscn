@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://o6402m5o0mus"]
-
-[ext_resource type="Texture2D" uid="uid://c1fh4ic3sppo4" path="res://scenes/world/SleepingBag/SleepingBag.png" id="1_aecef"]
-
-[node name="SleepingBag" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_aecef")

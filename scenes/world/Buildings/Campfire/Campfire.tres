@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://55g0h0hm72rk"]
+
+[ext_resource type="Texture2D" uid="uid://dphftnr1rey5g" path="res://scenes/world/Buildings/Campfire/CampfireAnim.png" id="1_uqxdi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp562"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyprh"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gy2e2"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7txt"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnjvv"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap7jo"]
+atlas = ExtResource("1_uqxdi")
+region = Rect2(96, 0, 32, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp562")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyprh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gy2e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7txt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnjvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap7jo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]

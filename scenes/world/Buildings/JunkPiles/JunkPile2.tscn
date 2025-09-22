@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://pa0204ohtbvr"]
+
+[ext_resource type="Script" uid="uid://dvmrov7evid1q" path="res://scenes/world/Buildings/JunkPiles/JunkPile.gd" id="1_mdcql"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="1_p5ymj"]
+[ext_resource type="Texture2D" uid="uid://c4f1y7ro4ss5p" path="res://scenes/world/Buildings/JunkPiles/JunkPile2.png" id="1_tqyla"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5ymj"]
+radius = 24.9991
+height = 100.03
+
+[node name="JunkPile2" type="Area2D"]
+script = ExtResource("1_mdcql")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_p5ymj")
+texture = ExtResource("1_tqyla")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -16)
+rotation = -1.56249
+shape = SubResource("CapsuleShape2D_p5ymj")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

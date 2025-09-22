@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://rhgh62qybd6c"]
+
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="1_5lhne"]
+[ext_resource type="Script" uid="uid://cespypakcik7f" path="res://scenes/world/Buildings/ConstructionShop/ConstructionShop.gd" id="2_yvdr8"]
+[ext_resource type="Texture2D" uid="uid://be0qw44au1y1i" path="res://scenes/world/Buildings/ConstructionShop/ConstructionShop.png" id="3_mu5ey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c85a2"]
+size = Vector2(128, 149)
+
+[node name="ConstructionShop" type="Area2D"]
+y_sort_enabled = true
+script = ExtResource("2_yvdr8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_5lhne")
+texture = ExtResource("3_mu5ey")
+offset = Vector2(0, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -59.5)
+shape = SubResource("RectangleShape2D_c85a2")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -9,6 +9,8 @@ extends Control
 @onready var menu_btn: Button = $MenuButton
 
 var _inv: Node = null
+var menu_scene: PackedScene = preload("res://scenes/ui/Menu.tscn")
+var menu_instance: Control = null
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE  # Allow clicks to pass through to world objects
@@ -24,11 +26,35 @@ func _ready() -> void:
 	_bind_inventory()
 	_refresh_all()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):  # ESC key
+		_on_menu_pressed()
+
 func _on_menu_pressed():
-	# Find the menu in the scene tree
-	var menu = get_tree().get_first_node_in_group("menu")
-	if menu:
-		menu.toggle_menu()
+	if not menu_instance:
+		# Create menu instance if it doesn't exist
+		menu_instance = menu_scene.instantiate()
+		
+		# Add to a high layer to ensure it renders on top
+		var menu_layer = CanvasLayer.new()
+		menu_layer.layer = 1
+		get_tree().current_scene.add_child(menu_layer)
+		menu_layer.add_child(menu_instance)
+		
+		# Connect menu signals
+		menu_instance.quit_to_main_menu_requested.connect(_on_menu_quit_requested)
+		menu_instance.resume_requested.connect(_on_menu_resume_requested)
+	
+	# Toggle the menu
+	menu_instance.toggle_menu()
+
+func _on_menu_quit_requested():
+	# Handle quit to main menu
+	get_tree().change_scene_to_file("res://scenes/main/MainMenu.tscn")
+
+func _on_menu_resume_requested():
+	# Menu will handle hiding itself, no action needed here
+	pass
 
 func _on_smelt_pressed():
 	var smelter = get_tree().root.find_child("Smelter", true, false)

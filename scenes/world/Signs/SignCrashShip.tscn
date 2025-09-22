@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2cgv1f4p42q0"]
+
+[ext_resource type="Texture2D" uid="uid://v03j5m71yc6p" path="res://scenes/world/Signs/SignDoubleCrooked.png" id="1_6vd0f"]
+[ext_resource type="Script" uid="uid://bkqs8okilweeo" path="res://scenes/world/Signs/SignCrashShip.gd" id="1_oqiwy"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="2_5cykh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqiwy"]
+size = Vector2(28, 40)
+
+[node name="SignCrashShip" type="Area2D"]
+script = ExtResource("1_oqiwy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_5cykh")
+texture = ExtResource("1_6vd0f")
+offset = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_oqiwy")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

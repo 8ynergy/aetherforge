@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://xp1ykwa2fkav"]
+
+[ext_resource type="SpriteFrames" uid="uid://55g0h0hm72rk" path="res://scenes/world/Buildings/Campfire/Campfire.tres" id="1_sruaf"]
+
+[node name="Campfire" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_sruaf")
+autoplay = "default"
+frame_progress = 0.472193
+offset = Vector2(0, -24)
