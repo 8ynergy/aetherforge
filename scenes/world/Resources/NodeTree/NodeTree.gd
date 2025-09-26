@@ -7,7 +7,7 @@ extends Area2D
 @onready var matanim: ShaderMaterial	  = $AnimatedSprite2D.material as ShaderMaterial
 
 # Preload textures directly from your given paths
-@onready var static_texture: Texture2D = preload("res://scenes/world/Resources/NodeTree/NodeTreeEmpty.png")
+# @onready var static_texture: Texture2D = preload("res://scenes/world/Resources/NodeTree/NodeTreeEmpty.png")
 
 
 # -------------------------------------------------------------------
@@ -29,7 +29,7 @@ func _ready() -> void:
 	else:
 		push_warning("No ShaderMaterial assigned for anim; hover outline won't appear.")
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		
 		_play_empty_shake()

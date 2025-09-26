@@ -375,9 +375,7 @@ offset = Vector2(0, -64)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("2_ivcjg")
 sprite_frames = SubResource("SpriteFrames_ib03c")
-animation = &"EmptyHover"
-frame = 1
-frame_progress = 1.0
+animation = &"RipeHover"
 offset = Vector2(0, -64)
 
 [node name="AnimatedSprite2DLeaves" type="AnimatedSprite2D" parent="."]
@@ -385,8 +383,6 @@ z_index = 1
 material = ExtResource("2_ivcjg")
 sprite_frames = SubResource("SpriteFrames_5v67f")
 animation = &"HoverLeaves"
-frame = 14
-frame_progress = 1.0
 offset = Vector2(0, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -398,3 +394,9 @@ shape = SubResource("CapsuleShape2D_dr4uw")
 visible = false
 position = Vector2(1, -77)
 shape = SubResource("CircleShape2D_iqpdu")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2DLeaves" to="." method="_on_animated_sprite_2d_leaves_animation_finished"]

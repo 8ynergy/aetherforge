@@ -1,14 +1,18 @@
 extends Area2D
 
+enum State { RIPE, EMPTY }
+
 @onready var static_sprite: Sprite2D = $Sprite2D
 @onready var anim: AnimatedSprite2D   = $AnimatedSprite2D
 @onready var animLeaves: AnimatedSprite2D   = $AnimatedSprite2DLeaves
 @onready var mat: ShaderMaterial	  = $Sprite2D.material as ShaderMaterial
 @onready var matanim: ShaderMaterial	  = $AnimatedSprite2D.material as ShaderMaterial
 
+var state: State = State.RIPE
+
 # Preload textures directly from your given paths
-@onready var static_texture: Texture2D = preload("res://scenes/world/Resources/NodeTreeApple/NodeTreeAppleEmpty.png")
-@onready var static_apple_texture: Texture2D = preload("res://scenes/world/Resources/NodeTreeApple/NodeTreeAppleRipe.png")
+# @onready var static_texture: Texture2D = preload("res://scenes/world/Resources/NodeTreeApple/NodeTreeAppleEmpty.png")
+# @onready var static_apple_texture: Texture2D = preload("res://scenes/world/Resources/NodeTreeApple/NodeTreeAppleRipe.png")
 
 
 # -------------------------------------------------------------------
@@ -30,10 +34,22 @@ func _ready() -> void:
 	else:
 		push_warning("No ShaderMaterial assigned for anim; hover outline won't appear.")
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	match state:
+		State.RIPE:
+			anim.animation = "RipeHover"
+		State.EMPTY:
+			anim.animation = "EmptyHover"
+		_:
+			pass
+
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		
-		_play_empty_shake()
+		if state == State.RIPE:
+				_play_ripe_shake()
+
+		if state == State.EMPTY:
+				_play_empty_shake()
 
 
 # -------------------------------------------------------------------
@@ -44,7 +60,13 @@ func _on_mouse_entered() -> void:
 	if matanim:
 		matanim.set_shader_parameter("OnHoverShader", true)
 
-	_play_empty_hover()
+		match state:
+			State.RIPE:
+				_play_ripe_hover()
+			State.EMPTY:
+				_play_empty_hover()
+			_:
+				pass
 
 func _on_mouse_exited() -> void:
 	# Remove hover outline
@@ -61,22 +83,37 @@ func _play_empty_hover() -> void:
 	anim.show()
 	anim.play("EmptyHover")
 	animLeaves.show()
-	animLeaves.play("EmptyHoverLeaves")
+	animLeaves.play("HoverLeaves")
 	
 func _play_empty_shake() -> void:
 	# static_sprite.hide()
 	anim.show()
 	anim.play("EmptyShake")
 	animLeaves.show()
-	animLeaves.play("EmptyShakeLeaves")
+	animLeaves.play("ShakeLeaves")
+
+func _play_ripe_hover() -> void:
+	# static_sprite.hide()
+	anim.show()
+	anim.play("RipeHover")
+	animLeaves.show()
+	animLeaves.play("HoverLeaves")
+
+func _play_ripe_shake() -> void:
+	# static_sprite.hide()
+	anim.show()
+	anim.play("RipeShake")
+	animLeaves.show()
+	animLeaves.play("ShakeLeaves")
+	state = State.EMPTY
 
 # -------------------------------------------------------------------
 # Animation finished
 # -------------------------------------------------------------------
 func _on_animated_sprite_2d_animation_finished() -> void:
 	match String(anim.animation):
-		"EmptyHover":
-			pass
+		"RipeShake":
+			anim.animation = "EmptyHover"
 
 		"EmptyShake":
 			pass
@@ -84,8 +121,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_animated_sprite_2d_leaves_animation_finished() -> void:
 	match String(animLeaves.animation):
-		"EmptyHoverLeaves":
+		"HoverLeaves":
 			animLeaves.hide()
 		
-		"EmptyShakeLeaves":
+		"ShakeLeaves":
 			animLeaves.hide()

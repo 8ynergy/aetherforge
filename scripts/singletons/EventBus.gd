@@ -2,15 +2,15 @@ extends Node
 
 var _subs := {} # {name: Array[Callable]}
 
-func subscribe(name: String, fn: Callable) -> void:
-	if not _subs.has(name):
-		_subs[name] = []
-	_subs[name].append(fn)
+func subscribe(EventName: String, fn: Callable) -> void:
+	if not _subs.has(EventName):
+		_subs[EventName] = []
+	_subs[EventName].append(fn)
 
-func emit(name: String, payload: Variant = null) -> void:
-	if not _subs.has(name):
+func emit(EventName: String, payload: Variant = null) -> void:
+	if not _subs.has(EventName):
 		return
-	for fn in _subs[name]:
+	for fn in _subs[EventName]:
 		if payload == null:
 			fn.call()
 		else:

@@ -9,12 +9,11 @@ func _ready() -> void:
 	purchase_succeeded.connect(_on_purchase)
 
 func buy(id: String) -> void:
-	var inv = get_tree().get_first_node_in_group("inventory")
-	if inv == null or not OFFERS.has(id):
-		emit_signal("purchase_failed", id, "locks or funds")
+	if not OFFERS.has(id):
+		emit_signal("purchase_failed", id, "item_not_available")
 		return
 	
-	var error = inv.spend_credits(OFFERS[id].cost)
+	var error = Inventory.spend_credits(OFFERS[id].cost)
 	if error != "":
 		if error == "insufficient_funds_low":
 			print("Insufficient funds.")

@@ -1,14 +1,12 @@
 extends Control
 
 # UI references
-@onready var credits_label: Label = $CreditsLabel
-@onready var stone_label: Label = $StoneLabel
-@onready var bar_label: Label = $BarLabel
+@onready var credits_label: Label = $MarginTop/HUDTop/CreditsLabel
+@onready var resources_btn: MenuButton = $MarginBottom/HUDBottom/ResourcesButton
 @onready var smelt_btn: Button = $SmeltButton
 @onready var buy_drone_btn: Button = $BuyDroneButton
-@onready var menu_btn: Button = $MenuButton
+@onready var menu_btn: Button = $MarginBottom/HUDBottom/MenuButton
 
-var _inv: Node = null
 var menu_scene: PackedScene = preload("res://scenes/ui/Menu.tscn")
 var menu_instance: Control = null
 
@@ -22,8 +20,8 @@ func _ready() -> void:
 		buy_drone_btn.pressed.connect(_on_buy_drone_pressed)
 	if menu_btn:
 		menu_btn.pressed.connect(_on_menu_pressed)
-	
-	_bind_inventory()
+	if resources_btn:
+		resources_btn.about_to_popup.connect(_on_resources_menu_about_to_popup)
 	_refresh_all()
 
 func _input(event):
@@ -67,24 +65,46 @@ func _on_buy_drone_pressed():
 	var shop = get_tree().root.find_child("ShopSystem", true, false)
 	if shop:
 		shop.buy("mining_drone_mk1")
-	
-func _bind_inventory() -> void:
-	var main := get_tree().get_current_scene()
-	if main and main.has_node("SystemsRoot/Inventory"):
-		_inv = main.get_node("SystemsRoot/Inventory")
-	else:
-		_inv = get_tree().get_first_node_in_group("inventory")
-	if _inv and not _inv.is_connected("inventory_changed", Callable(self, "_on_inventory_changed")):
-		_inv.connect("inventory_changed", Callable(self, "_on_inventory_changed"))
 
 func _on_inventory_changed(_id: String, _qty: int) -> void:
 	_refresh_all()
 
 func _refresh_all() -> void:
-	# _inv connects to Inventory.gd
-	if _inv and _inv.has_method("get_credits") and credits_label:
-		credits_label.text = "Credits: %d" % int(_inv.call("get_credits"))
-	if _inv and _inv.has_method("get_qty") and stone_label:
-		stone_label.text = "Stone: %d" % int(_inv.call("get_qty", "stone"))
-	if _inv and _inv.has_method("get_qty") and bar_label:
-		bar_label.text = "Stone Bars: %d" % int(_inv.call("get_qty", "stone_bar"))
+	if Inventory.has_method("get_credits") and credits_label:
+		credits_label.text = "Credits: %d" % int(Inventory.call("get_credits"))
+
+func _on_resources_menu_about_to_popup():
+	if not Inventory:
+		return
+	
+	 # Clear existing items in the popup
+	var popup = resources_btn.get_popup()
+	popup.clear()
+	
+	# Get all discovered resources
+	var discovered = Inventory.get_discovered_resources()
+	
+	# Filter to only show actual resources (not credits)
+	var resource_types = ItemDatabase.RESOURCE_TYPES.keys()
+	var display_resources = []
+	
+	for resource_id in discovered:
+		if resource_id in resource_types:
+				display_resources.append(resource_id)
+	
+	# Sort resources for consistent display
+	display_resources.sort()
+	
+	# Add each resource as a menu item
+	for resource_id in display_resources:
+		var qty = Inventory.get_qty(resource_id)
+		var display_name = resource_id.replace("_", " ").capitalize()
+		popup.add_item("%s: %d" % [display_name, qty])
+		
+func _format_resource_name(resource_id: String) -> String:
+	# Convert snake_case to Title Case
+	var words = resource_id.split("_")
+	var formatted = ""
+	for word in words:
+		formatted += word.capitalize() + " "
+	return formatted.strip_edges()

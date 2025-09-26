@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://be38nvwm0we28"]
+[gd_scene load_steps=4 format=3 uid="uid://be38nvwm0we28"]
 
 [ext_resource type="Script" uid="uid://55u6jrtenpkr" path="res://scenes/main/StartButton.gd" id="1_qi05h"]
 [ext_resource type="Script" uid="uid://ddn206he4k2ib" path="res://scenes/main/QuitButton.gd" id="2_uort0"]
+[ext_resource type="Script" uid="uid://t1ght6kc5cah" path="res://scenes/ui/LoadButton.gd" id="3_load_btn"]
 
 [node name="MainMenu" type="Node2D"]
 
@@ -22,13 +23,21 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="StartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Start"
+text = "New Game"
 script = ExtResource("1_qi05h")
+
+[node name="LoadGameButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Load Game"
+script = ExtResource("3_load_btn")
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 60)

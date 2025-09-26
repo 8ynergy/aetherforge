@@ -9,7 +9,7 @@ extends Camera2D
 func _ready() -> void:
 	make_current()		# Activate this camera in Godot 4.x
 						# Alternatively: enabled = true
-	position = Vector2(1280, 720) * 0.5
+	position = Vector2(1920, 1080) * 0.5
 
 func _process(delta: float) -> void:
 	var vp: Viewport = get_viewport()

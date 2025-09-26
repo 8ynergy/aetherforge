@@ -21,11 +21,13 @@ TimeBus="*res://scripts/singletons/TimeBus.gd"
 EventBus="*res://scripts/singletons/EventBus.gd"
 GameDB="*res://scripts/singletons/GameDB.gd"
 Balance="*res://scripts/singletons/Balance.gd"
+Inventory="*res://scripts/singletons/Inventory.gd"
+Global="*res://scripts/singletons/Global.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

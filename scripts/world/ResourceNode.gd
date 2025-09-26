@@ -1,5 +1,6 @@
-class_name ResourceNode
 extends Area2D
+class_name ResourceNode
+
 
 @export var max_hp: int = 2
 @export var resource_type: String
@@ -15,7 +16,7 @@ func _ready() -> void:
 	hp = max_hp
 	input_pickable = true
 
-func _input_event(viewport, event, shape_idx) -> void:
+func _input_event(_viewport, event, _shape_idx) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("Resource node clicked!")  # DEBUG
 		var dmg := Balance.click_damage()
@@ -51,11 +52,7 @@ func _deplete() -> void:
 	emit_signal("resource_depleted", self, resource_type, resource_amount)
 	
 	# Add resources to inventory before destroying
-	var inv := get_tree().get_first_node_in_group("inventory")
-	if inv == null:
-		inv = get_tree().root.find_child("Inventory", true, false)
-	if inv:
-		inv.add(resource_type, resource_amount)
+	Inventory.add_to_inventory(resource_type, resource_amount)
 	
 	# Destroy the node instead of respawning
 	queue_free()
