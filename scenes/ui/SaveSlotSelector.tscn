@@ -83,6 +83,36 @@ text = "Slot 5 - Empty"
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="ActionButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LoadButton" type="Button" parent="CenterContainer/VBoxContainer/ActionButtonContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+visible = false
+
+[node name="DeleteButton" type="Button" parent="CenterContainer/VBoxContainer/ActionButtonContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Delete"
+visible = false
+
+[node name="CancelButton" type="Button" parent="CenterContainer/VBoxContainer/ActionButtonContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Cancel"
+visible = false
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="ButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4

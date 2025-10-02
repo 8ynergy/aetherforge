@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dct4u3a48o5ch"]
+[gd_scene load_steps=3 format=3 uid="uid://dct4u3a48o5ch"]
 
 [ext_resource type="Script" uid="uid://dnivntv77ue5" path="res://scenes/ui/HUD.gd" id="1_kw0id"]
+[ext_resource type="PackedScene" uid="uid://b8x7k2m3n4p5q" path="res://scenes/ui/StaminaBar.tscn" id="5_stamina_bar"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -32,6 +33,16 @@ text = "CreditsLabel"
 [node name="Spacer" type="Control" parent="MarginTop/HUDTop"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="StaminaBar" parent="." instance=ExtResource("5_stamina_bar")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 5.0
+offset_bottom = 65.0
+grow_horizontal = 0
 
 [node name="SmeltButton" type="Button" parent="."]
 visible = false

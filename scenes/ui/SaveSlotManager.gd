@@ -2,12 +2,17 @@ extends Control
 
 # Signals for communication with parent scenes
 signal slot_selected(slot_number: int)
+signal load_requested(slot_number: int)
+signal delete_requested(slot_number: int)
+signal action_cancelled
 signal back_pressed
 
 # Mode: "save", "load", or "new_game"
 var mode: String = "save"
 var slot_buttons: Array[Button] = []
 var current_confirmation_dialog: Control = null
+var selected_slot: int = 0
+var action_buttons: Array[Button] = []
 
 func _ready() -> void:
 	# Get all slot buttons
@@ -19,9 +24,21 @@ func _ready() -> void:
 		$CenterContainer/VBoxContainer/SlotGrid/Slot5
 	]
 	
+	# Get action buttons
+	action_buttons = [
+		$CenterContainer/VBoxContainer/ActionButtonContainer/LoadButton,
+		$CenterContainer/VBoxContainer/ActionButtonContainer/DeleteButton,
+		$CenterContainer/VBoxContainer/ActionButtonContainer/CancelButton
+	]
+	
 	# Connect slot button signals
 	for i in range(slot_buttons.size()):
 		slot_buttons[i].pressed.connect(_on_slot_button_pressed.bind(i + 1))
+	
+	# Connect action button signals
+	action_buttons[0].pressed.connect(_on_load_pressed)  # LoadButton
+	action_buttons[1].pressed.connect(_on_delete_pressed)  # DeleteButton
+	action_buttons[2].pressed.connect(_on_cancel_pressed)  # CancelButton
 	
 	# Connect back button
 	$CenterContainer/VBoxContainer/ButtonContainer/BackButton.pressed.connect(_on_back_pressed)
@@ -29,12 +46,17 @@ func _ready() -> void:
 	# Connect background click to close dialog
 	$Background.gui_input.connect(_on_background_clicked)
 	
+	# Initially hide action buttons
+	_hide_action_buttons()
+	
 	# Update slot display
 	_update_slot_display()
 
 func set_mode(new_mode: String) -> void:
 	"""Set the mode: 'save', 'load', or 'new_game'"""
 	mode = new_mode
+	selected_slot = 0
+	_hide_action_buttons()
 	_update_title()
 	_update_slot_display()
 
@@ -55,6 +77,9 @@ func _update_slot_display() -> void:
 	for i in range(slot_buttons.size()):
 		var slot_info = all_slots[i]
 		var button = slot_buttons[i]
+		
+		# Reset button appearance
+		button.modulate = Color.WHITE
 		
 		if slot_info.get("empty", true):
 			button.text = "Slot " + str(i + 1) + " - Empty"
@@ -84,19 +109,25 @@ func _update_slot_display() -> void:
 			
 			# All non-empty slots should be enabled for save, load, and new_game modes
 			button.disabled = false
+		
+		# Highlight selected slot
+		if selected_slot == i + 1:
+			button.modulate = Color.YELLOW
 
 func _on_slot_button_pressed(slot_number: int) -> void:
-	"""Handle slot button press"""
-	# Check if we need to show a confirmation dialog
+	"""Handle slot button press - now selects the slot instead of immediately acting"""
 	var slot_info = Global.get_slot_info(slot_number)
 	var is_empty = slot_info.get("empty", true)
 	
-	# Show confirmation for overwriting existing saves
-	if not is_empty and (mode == "save" or mode == "new_game"):
-		_show_overwrite_confirmation(slot_number, slot_info)
-	else:
-		# No confirmation needed, proceed directly
-		slot_selected.emit(slot_number)
+	# For load mode, only allow selection of non-empty slots
+	if mode == "load" and is_empty:
+		return
+	
+	# Select the slot
+	selected_slot = slot_number
+	_update_slot_display()
+	_show_action_buttons()
+	slot_selected.emit(slot_number)
 
 func _show_overwrite_confirmation(slot_number: int, slot_info: Dictionary) -> void:
 	"""Show confirmation dialog for overwriting existing save"""
@@ -247,3 +278,134 @@ func _on_background_clicked(event: InputEvent) -> void:
 	"""Handle background click to close dialog"""
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		back_pressed.emit()
+
+# New action button functions
+func _on_load_pressed() -> void:
+	"""Handle Load button press"""
+	if selected_slot > 0:
+		load_requested.emit(selected_slot)
+
+func _on_delete_pressed() -> void:
+	"""Handle Delete button press"""
+	if selected_slot > 0:
+		var slot_info = Global.get_slot_info(selected_slot)
+		var is_empty = slot_info.get("empty", true)
+		
+		if not is_empty:
+			_show_delete_confirmation(selected_slot, slot_info)
+		else:
+			# Can't delete empty slot
+			print("Cannot delete empty slot")
+
+func _on_cancel_pressed() -> void:
+	"""Handle Cancel button press"""
+	selected_slot = 0
+	_hide_action_buttons()
+	_update_slot_display()
+	action_cancelled.emit()
+
+# Helper functions for action buttons
+func _show_action_buttons() -> void:
+	"""Show the action buttons"""
+	for button in action_buttons:
+		button.visible = true
+	
+	# Update button text and visibility based on mode and slot state
+	var slot_info = Global.get_slot_info(selected_slot)
+	var is_empty = slot_info.get("empty", true)
+	
+	match mode:
+		"load":
+			action_buttons[0].text = "Load"  # LoadButton
+			action_buttons[0].visible = not is_empty
+			action_buttons[1].text = "Delete"  # DeleteButton
+			action_buttons[1].visible = not is_empty
+			action_buttons[2].text = "Cancel"  # CancelButton
+			action_buttons[2].visible = true
+		"save":
+			action_buttons[0].text = "Save"  # LoadButton (repurposed)
+			action_buttons[0].visible = true
+			action_buttons[1].text = "Delete"  # DeleteButton
+			action_buttons[1].visible = not is_empty
+			action_buttons[2].text = "Cancel"  # CancelButton
+			action_buttons[2].visible = true
+		"new_game":
+			action_buttons[0].text = "New Game"  # LoadButton (repurposed)
+			action_buttons[0].visible = true
+			action_buttons[1].text = "Delete"  # DeleteButton
+			action_buttons[1].visible = not is_empty
+			action_buttons[2].text = "Cancel"  # CancelButton
+			action_buttons[2].visible = true
+
+func _hide_action_buttons() -> void:
+	"""Hide the action buttons"""
+	for button in action_buttons:
+		button.visible = false
+
+func _show_delete_confirmation(slot_number: int, slot_info: Dictionary) -> void:
+	"""Show confirmation dialog for deleting a save slot"""
+	# Hide the SaveSlotSelector content and background while showing confirmation dialog
+	$CenterContainer.visible = false
+	$Background.visible = false
+	
+	current_confirmation_dialog = preload("res://scenes/ui/ConfirmationDialog.tscn").instantiate()
+	# Add to the same parent as this SaveSlotSelector to maintain proper UI hierarchy
+	get_parent().add_child(current_confirmation_dialog)
+	
+	var title = "Delete Save Slot?"
+	var timestamp = slot_info.get(SaveSettings.METADATA_KEYS.timestamp, "Unknown")
+	var formatted_timestamp = _format_timestamp(timestamp)
+	var message = "Slot " + str(slot_number) + " contains an existing save.\n\n" + \
+				 "Level: " + slot_info.get(SaveSettings.METADATA_KEYS.level, "Unknown") + "\n" + \
+				 "Date: " + formatted_timestamp + "\n\n" + \
+				 "Deleting will permanently remove this save.\n\n" + \
+				 "Are you sure you want to continue?"
+	
+	current_confirmation_dialog.show_confirmation(title, message, slot_number, "delete")
+	current_confirmation_dialog.confirmed.connect(_on_delete_confirmation_confirmed)
+	current_confirmation_dialog.cancelled.connect(_on_delete_confirmation_cancelled)
+
+func _on_delete_confirmation_confirmed(slot_number: int, _mode: String) -> void:
+	"""Handle delete confirmation dialog confirmed"""
+	print("SaveSlotManager: Delete confirmation confirmed for slot ", slot_number)
+	
+	# Clean up confirmation dialog
+	if current_confirmation_dialog:
+		print("SaveSlotManager: Cleaning up delete confirmation dialog")
+		# Disconnect signals to prevent double-cleanup
+		if current_confirmation_dialog.confirmed.is_connected(_on_delete_confirmation_confirmed):
+			current_confirmation_dialog.confirmed.disconnect(_on_delete_confirmation_confirmed)
+		if current_confirmation_dialog.cancelled.is_connected(_on_delete_confirmation_cancelled):
+			current_confirmation_dialog.cancelled.disconnect(_on_delete_confirmation_cancelled)
+		current_confirmation_dialog.queue_free()
+		current_confirmation_dialog = null
+	
+	# Restore SaveSlotSelector
+	$CenterContainer.visible = true
+	$Background.visible = true
+	print("SaveSlotManager: Restored SaveSlotSelector visibility")
+	
+	# Delete the slot
+	Global.delete_slot(slot_number)
+	print("SaveSlotManager: Deleted slot ", slot_number)
+	
+	# Update display and reset selection
+	selected_slot = 0
+	_hide_action_buttons()
+	_update_slot_display()
+
+func _on_delete_confirmation_cancelled() -> void:
+	"""Handle delete confirmation dialog cancelled"""
+	# Clean up confirmation dialog
+	if current_confirmation_dialog:
+		# Disconnect signals to prevent double-cleanup
+		if current_confirmation_dialog.confirmed.is_connected(_on_delete_confirmation_confirmed):
+			current_confirmation_dialog.confirmed.disconnect(_on_delete_confirmation_confirmed)
+		if current_confirmation_dialog.cancelled.is_connected(_on_delete_confirmation_cancelled):
+			current_confirmation_dialog.cancelled.disconnect(_on_delete_confirmation_cancelled)
+		current_confirmation_dialog.queue_free()
+		current_confirmation_dialog = null
+	
+	# Restore SaveSlotSelector content and background
+	$CenterContainer.visible = true
+	$Background.visible = true

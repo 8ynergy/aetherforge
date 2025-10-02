@@ -23,6 +23,7 @@ GameDB="*res://scripts/singletons/GameDB.gd"
 Balance="*res://scripts/singletons/Balance.gd"
 Inventory="*res://scripts/singletons/Inventory.gd"
 Global="*res://scripts/singletons/Global.gd"
+Stamina="*res://scripts/singletons/Stamina.gd"
 
 [display]
 

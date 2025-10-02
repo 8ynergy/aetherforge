@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6dhcjgpbx8jq"]
+
+[ext_resource type="Texture2D" uid="uid://cxva4cp8u7pa" path="res://assets/Particles/WhiteSquare.png" id="1_white_square"]
+
+[sub_resource type="Curve" id="Curve_o8mug"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.501639, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_drhq0"]
+curve = SubResource("Curve_o8mug")
+
+[sub_resource type="Curve" id="Curve_0ftqc"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, -482.555, 0, 0, Vector2(0.15082, 25.85), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3sac4"]
+curve = SubResource("Curve_0ftqc")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_o8mug"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2jfc"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_curve = SubResource("CurveTexture_drhq0")
+direction = Vector3(0, 0, 0)
+spread = 360.0
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angular_velocity_curve = SubResource("CurveTexture_3sac4")
+directional_velocity_min = 0.499984
+directional_velocity_max = 0.999984
+directional_velocity_curve = SubResource("CurveXYZTexture_o8mug")
+radial_accel_min = 0.999998
+radial_accel_max = 3.0
+damping_min = 600.0
+damping_max = 900.0
+scale_min = 0.75
+scale_max = 1.25
+
+[node name="ClickParticleEffect" type="GPUParticles2D"]
+emitting = false
+amount = 15
+texture = ExtResource("1_white_square")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_m2jfc")

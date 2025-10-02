@@ -23,32 +23,44 @@ func _on_load_pressed():
 	slot_selector.set_mode("load")
 	
 	# Connect signals
-	slot_selector.slot_selected.connect(_on_slot_selected)
+	slot_selector.load_requested.connect(_on_load_requested)
+	slot_selector.delete_requested.connect(_on_delete_requested)
+	slot_selector.action_cancelled.connect(_on_action_cancelled)
 	slot_selector.back_pressed.connect(_on_back_pressed)
 
-func _on_slot_selected(slot_number: int) -> void:
-	"""Handle slot selection for loading"""
+func _on_load_requested(slot_number: int) -> void:
+	"""Handle load request from slot selector"""
 	# Load from the selected slot
 	Global.load_from_slot(slot_number)
 	print("Game loaded from slot ", slot_number)
 	
 	# Remove slot selector
-	if get_tree().current_scene.name == "MainMenu":
-		var canvas_layer = get_tree().current_scene.get_node("CanvasLayer")
-		var slot_selector = canvas_layer.get_node("SaveSlotSelector")
-		if slot_selector:
-			slot_selector.queue_free()
-	else:
-		var ui_root = get_tree().current_scene.get_node("UIRoot")
-		var slot_selector = ui_root.get_node("SaveSlotSelector")
-		if slot_selector:
-			slot_selector.queue_free()
+	_remove_slot_selector()
 	
 	# Always go to Camp.tscn when loading a game
 	get_tree().change_scene_to_file("res://scenes/main/Camp.tscn")
 
+func _on_delete_requested(slot_number: int) -> void:
+	"""Handle delete request from slot selector"""
+	# The SaveSlotManager already handles the delete confirmation and deletion
+	# This function is here for completeness but doesn't need to do anything
+	print("Delete requested for slot ", slot_number)
+
+func _on_action_cancelled() -> void:
+	"""Handle action cancellation from slot selector"""
+	# The SaveSlotManager already handles the cancellation
+	# This function is here for completeness but doesn't need to do anything
+	print("Action cancelled")
+
 func _on_back_pressed() -> void:
 	"""Handle back button - remove slot selector"""
+	_remove_slot_selector()
+	
+	# Restore menus after closing save slot selector
+	_restore_menus()
+
+func _remove_slot_selector() -> void:
+	"""Helper function to remove the slot selector"""
 	if get_tree().current_scene.name == "MainMenu":
 		var canvas_layer = get_tree().current_scene.get_node("CanvasLayer")
 		var slot_selector = canvas_layer.get_node("SaveSlotSelector")
@@ -59,9 +71,6 @@ func _on_back_pressed() -> void:
 		var slot_selector = ui_root.get_node("SaveSlotSelector")
 		if slot_selector:
 			slot_selector.queue_free()
-	
-	# Restore menus after closing save slot selector
-	_restore_menus()
 
 func _hide_menus() -> void:
 	"""Hide any open menus"""

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=4 uid="uid://b8x70a02a1b3c"]
+
+[ext_resource type="Script" path="res://scenes/ui/DamageText.gd" id="1_damage_text"]
+
+[node name="DamageText" type="Label"]
+script = ExtResource("1_damage_text")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 10.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

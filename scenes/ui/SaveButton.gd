@@ -23,18 +23,55 @@ func _on_save_pressed():
 	slot_selector.set_mode("save")
 	
 	# Connect signals
-	slot_selector.slot_selected.connect(_on_slot_selected)
+	slot_selector.load_requested.connect(_on_save_requested)
+	slot_selector.delete_requested.connect(_on_delete_requested)
+	slot_selector.action_cancelled.connect(_on_action_cancelled)
 	slot_selector.back_pressed.connect(_on_back_pressed)
 
-func _on_slot_selected(slot_number: int) -> void:
-	"""Handle slot selection for saving"""
-	print("SaveButton: slot_selected signal received for slot ", slot_number)
+func _on_save_requested(slot_number: int) -> void:
+	"""Handle save request from slot selector"""
+	print("SaveButton: save_requested signal received for slot ", slot_number)
 	
 	# Save to the selected slot
 	Global.save_to_slot(slot_number)
 	print("Game saved to slot ", slot_number)
 	
 	# Remove slot selector
+	_remove_slot_selector()
+	
+	# Close any open menu instances (from in-game menu)
+	var menu_nodes = get_tree().get_nodes_in_group("menu")
+	print("SaveButton: Found ", menu_nodes.size(), " menu nodes")
+	for menu in menu_nodes:
+		if menu.has_method("hide_menu"):
+			print("SaveButton: Hiding menu")
+			menu.hide_menu()
+	
+	# Restore menus after closing save slot selector
+	_restore_menus()
+
+func _on_delete_requested(slot_number: int) -> void:
+	"""Handle delete request from slot selector"""
+	# The SaveSlotManager already handles the delete confirmation and deletion
+	# This function is here for completeness but doesn't need to do anything
+	print("Delete requested for slot ", slot_number)
+
+func _on_action_cancelled() -> void:
+	"""Handle action cancellation from slot selector"""
+	# The SaveSlotManager already handles the cancellation
+	# This function is here for completeness but doesn't need to do anything
+	print("Action cancelled")
+
+func _on_back_pressed() -> void:
+	"""Handle back button - remove slot selector"""
+	print("SaveButton: Back button pressed, removing slot selector")
+	_remove_slot_selector()
+	
+	# Restore menus after closing save slot selector
+	_restore_menus()
+
+func _remove_slot_selector() -> void:
+	"""Helper function to remove the slot selector"""
 	print("SaveButton: Current scene name: ", get_tree().current_scene.name)
 	var slot_selector = null
 	
@@ -63,34 +100,6 @@ func _on_slot_selected(slot_number: int) -> void:
 			slot_selector.queue_free()
 		else:
 			print("SaveButton: SaveSlotSelector not found anywhere in scene")
-	
-	# Close any open menu instances (from in-game menu)
-	var menu_nodes = get_tree().get_nodes_in_group("menu")
-	print("SaveButton: Found ", menu_nodes.size(), " menu nodes")
-	for menu in menu_nodes:
-		if menu.has_method("hide_menu"):
-			print("SaveButton: Hiding menu")
-			menu.hide_menu()
-	
-	# Restore menus after closing save slot selector
-	_restore_menus()
-
-func _on_back_pressed() -> void:
-	"""Handle back button - remove slot selector"""
-	print("SaveButton: Back button pressed, removing slot selector")
-	if get_tree().current_scene.name == "MainMenu":
-		var canvas_layer = get_tree().current_scene.get_node("CanvasLayer")
-		var slot_selector = canvas_layer.get_node("SaveSlotSelector")
-		if slot_selector:
-			slot_selector.queue_free()
-	else:
-		var ui_root = get_tree().current_scene.get_node("UIRoot")
-		var slot_selector = ui_root.get_node("SaveSlotSelector")
-		if slot_selector:
-			slot_selector.queue_free()
-	
-	# Restore menus after closing save slot selector
-	_restore_menus()
 
 func _hide_menus() -> void:
 	"""Hide any open menus"""

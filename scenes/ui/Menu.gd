@@ -72,12 +72,14 @@ func _show_save_slot_selector():
 	slot_selector.set_mode("save")
 	
 	# Connect signals directly to this Menu instance
-	slot_selector.slot_selected.connect(_on_slot_selected)
+	slot_selector.load_requested.connect(_on_save_requested)
+	slot_selector.delete_requested.connect(_on_delete_requested)
+	slot_selector.action_cancelled.connect(_on_action_cancelled)
 	slot_selector.back_pressed.connect(_on_back_pressed)
 
-func _on_slot_selected(slot_number: int) -> void:
-	"""Handle slot selection for saving"""
-	print("Menu: slot_selected signal received for slot ", slot_number)
+func _on_save_requested(slot_number: int) -> void:
+	"""Handle save request from slot selector"""
+	print("Menu: save_requested signal received for slot ", slot_number)
 	
 	# Save to the selected slot
 	Global.save_to_slot(slot_number)
@@ -93,6 +95,18 @@ func _on_slot_selected(slot_number: int) -> void:
 		if menu.has_method("hide_menu"):
 			print("Menu: Hiding menu")
 			menu.hide_menu()
+
+func _on_delete_requested(slot_number: int) -> void:
+	"""Handle delete request from slot selector"""
+	# The SaveSlotManager already handles the delete confirmation and deletion
+	# This function is here for completeness but doesn't need to do anything
+	print("Delete requested for slot ", slot_number)
+
+func _on_action_cancelled() -> void:
+	"""Handle action cancellation from slot selector"""
+	# The SaveSlotManager already handles the cancellation
+	# This function is here for completeness but doesn't need to do anything
+	print("Action cancelled")
 
 func _on_back_pressed() -> void:
 	"""Handle back button - remove slot selector"""
@@ -163,12 +177,14 @@ func _show_load_slot_selector():
 	slot_selector.set_mode("load")
 	
 	# Connect signals directly to this Menu instance
-	slot_selector.slot_selected.connect(_on_load_slot_selected)
+	slot_selector.load_requested.connect(_on_load_requested)
+	slot_selector.delete_requested.connect(_on_delete_requested)
+	slot_selector.action_cancelled.connect(_on_action_cancelled)
 	slot_selector.back_pressed.connect(_on_back_pressed)
 
-func _on_load_slot_selected(slot_number: int) -> void:
-	"""Handle slot selection for loading"""
-	print("Menu: load slot_selected signal received for slot ", slot_number)
+func _on_load_requested(slot_number: int) -> void:
+	"""Handle load request from slot selector"""
+	print("Menu: load_requested signal received for slot ", slot_number)
 	
 	# Load from the selected slot
 	Global.load_from_slot(slot_number)

@@ -11,13 +11,17 @@ const SAVE_PATH := SaveSettings.SAVE_PATH
 # Current save slot tracking
 var current_save_slot: int = 1
 var game_start_time: float = 0.0
+var session_start_time: float = 0.0
+
+# Cave level system
+var current_cave_level: int = 1
 
 func _ready() -> void:
 	# Connect to the notification system to detect when the game is closing
 	# This ensures auto-save happens when the player closes the game
 	
 	_start_periodic_auto_save(300.0)  # Auto-save every 5 minutes (300 seconds)
-	game_start_time = Time.get_unix_time_from_system()
+	session_start_time = Time.get_unix_time_from_system()
 	print("Global singleton initialized - periodic auto-save started")
 
 func _notification(what: int) -> void:
@@ -143,6 +147,12 @@ func _apply_drones(n: int) -> void:
 		for i in n:
 			mgr.spawn_mining_drone()
 
+func _apply_stamina(stamina_value: int) -> void:
+	"""Apply stamina value from save file"""
+	if Stamina:
+		Stamina.set_stamina(stamina_value)
+		print("Stamina loaded: ", stamina_value)
+
 # Save Slot Management Functions
 func set_current_slot(slot_number: int) -> void:
 	"""Set the current save slot for auto-save"""
@@ -159,14 +169,57 @@ func save_to_slot(slot_number: int) -> void:
 	
 	var slot_path = SaveSettings.get_slot_path(slot_number)
 	var current_time = Time.get_unix_time_from_system()
-	var playtime = current_time - game_start_time
 	
-	# Create metadata
+	# Calculate cumulative playtime and get first play date
+	var existing_playtime = 0
+	var first_play_date = ""
+	if FileAccess.file_exists(slot_path):
+		# Load existing save to get current playtime and first play date
+		var existing_file = FileAccess.open(slot_path, FileAccess.READ)
+		var existing_txt = existing_file.get_as_text()
+		existing_file.close()
+		var existing_data = JSON.parse_string(existing_txt)
+		if typeof(existing_data) == TYPE_DICTIONARY:
+			var existing_metadata = existing_data.get(SaveSettings.SAVE_KEYS.metadata, {})
+			existing_playtime = existing_metadata.get(SaveSettings.METADATA_KEYS.playtime, 0)
+			first_play_date = existing_metadata.get(SaveSettings.METADATA_KEYS.first_play_date, "")
+	
+	# Add current session time to existing playtime
+	var session_playtime = current_time - session_start_time
+	var total_playtime = existing_playtime + int(session_playtime)
+	
+	# Create metadata with local time in readable format
+	var local_time = Time.get_datetime_dict_from_system(false)  # false = local time, not UTC
+	var month_names = ["", "January", "February", "March", "April", "May", "June",
+					   "July", "August", "September", "October", "November", "December"]
+	
+	var month_name = month_names[local_time.month]
+	var day = local_time.day
+	
+	# Format time with AM/PM
+	var hour = local_time.hour
+	var minute = local_time.minute
+	var am_pm = "AM"
+	if hour >= 12:
+		am_pm = "PM"
+	if hour > 12:
+		hour -= 12
+	elif hour == 0:
+		hour = 12
+	
+	var time_str = "%d:%02d%s" % [hour, minute, am_pm]
+	var timestamp_str = "%s %d, %s" % [month_name, day, time_str]
+	
+	# Set first play date if this is a new save
+	if first_play_date == "":
+		first_play_date = timestamp_str
+	
 	var metadata = {
-		SaveSettings.METADATA_KEYS.timestamp: Time.get_datetime_string_from_unix_time(current_time),
+		SaveSettings.METADATA_KEYS.timestamp: timestamp_str,
 		SaveSettings.METADATA_KEYS.player_name: "Player",  # Could be customizable later
 		SaveSettings.METADATA_KEYS.level: get_current_scene_name(),
-		SaveSettings.METADATA_KEYS.playtime: int(playtime)
+		SaveSettings.METADATA_KEYS.playtime: total_playtime,
+		SaveSettings.METADATA_KEYS.first_play_date: first_play_date
 	}
 	
 	# Safely get inventory data with fallbacks
@@ -184,11 +237,19 @@ func save_to_slot(slot_number: int) -> void:
 	if Inventory and Inventory.has_method("get_discovered_resources"):
 		discovered_resources = Inventory.get_discovered_resources()
 	
+	# Safely get stamina data
+	var stamina_data = {}
+	if Stamina:
+		stamina_data = {
+			SaveSettings.SAVE_KEYS.stamina: Stamina.get_current_stamina()
+		}
+	
 	var data = {
 		SaveSettings.SAVE_KEYS.metadata: metadata,
 		SaveSettings.SAVE_KEYS.game_data: {
 			SaveSettings.SAVE_KEYS.inventory: inventory_data,
 			SaveSettings.SAVE_KEYS.drones: _count_drones(),
+			SaveSettings.SAVE_KEYS.stamina: stamina_data.get(SaveSettings.SAVE_KEYS.stamina, Balance.get_max_stamina()),
 			"discovered_resources": discovered_resources
 		}
 	}
@@ -222,8 +283,9 @@ func load_from_slot(slot_number: int) -> void:
 		print("Invalid save file format in slot ", slot_number)
 		return
 	
-	# Set current slot
+	# Set current slot and reset session timer
 	current_save_slot = slot_number
+	session_start_time = Time.get_unix_time_from_system()  # Reset session timer when loading
 	
 	# Load game data
 	var game_data = data.get(SaveSettings.SAVE_KEYS.game_data, {})
@@ -236,6 +298,7 @@ func load_from_slot(slot_number: int) -> void:
 	
 	_apply_inventory(game_data.get(SaveSettings.SAVE_KEYS.inventory, {}))
 	_apply_drones(int(game_data.get(SaveSettings.SAVE_KEYS.drones, 0)))
+	_apply_stamina(int(game_data.get(SaveSettings.SAVE_KEYS.stamina, Balance.get_max_stamina())))
 	
 	print("Game loaded from slot ", slot_number)
 
@@ -310,4 +373,26 @@ func reset_game_data() -> void:
 		for drone in drones:
 			drone.queue_free()
 	
+	# Reset stamina
+	if Stamina:
+		Stamina.reset_stamina()
+	
 	print("Game data reset for new game")
+
+# Cave Level Management Functions
+func get_cave_level() -> int:
+	"""Get the current cave level"""
+	return current_cave_level
+
+func set_cave_level(level: int) -> void:
+	"""Set the current cave level"""
+	if level >= 1:
+		current_cave_level = level
+		print("Global: Cave level set to ", level)
+	else:
+		print("Global: Warning - Invalid cave level: ", level)
+
+func advance_cave_level() -> void:
+	"""Advance to the next cave level"""
+	current_cave_level += 1
+	print("Global: Advanced to cave level ", current_cave_level)

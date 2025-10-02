@@ -16,6 +16,7 @@ const SAVE_KEYS = {
 	"capacity": "capacity",
 	"credits": "credits",
 	"drones": "drones",
+	"stamina": "stamina",
 	"metadata": "metadata",
 	"game_data": "game_data"
 }
@@ -25,7 +26,8 @@ const METADATA_KEYS = {
 	"timestamp": "timestamp",
 	"player_name": "player_name",
 	"level": "level",
-	"playtime": "playtime"
+	"playtime": "playtime",
+	"first_play_date": "first_play_date"
 }
 
 # Drone identification

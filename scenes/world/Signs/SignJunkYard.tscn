@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://cb4a4861erc2w"]
+[gd_scene load_steps=5 format=3 uid="uid://cb4a4861erc2w"]
 
-[node name="SignLeft" type="Area2D"]
+[ext_resource type="Texture2D" uid="uid://dbiloa6jue2so" path="res://scenes/world/Signs/SignLeft.png" id="1_m5siq"]
+[ext_resource type="Script" uid="uid://dlfng6bj3jjcd" path="res://scenes/world/Signs/SignJunkYard.gd" id="1_sgtpo"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="2_ljpk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgtpo"]
+size = Vector2(28, 32)
+
+[node name="SignJunkYard" type="Area2D"]
+script = ExtResource("1_sgtpo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_ljpk3")
+texture = ExtResource("1_m5siq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_sgtpo")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
