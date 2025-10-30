@@ -153,6 +153,7 @@ animation = &"Open"
 offset = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -36)
 shape = SubResource("RectangleShape2D_equ67")
 

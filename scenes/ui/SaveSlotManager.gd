@@ -187,9 +187,9 @@ func _on_confirmation_confirmed(slot_number: int, _mode: String) -> void:
 	$Background.visible = true
 	print("SaveSlotManager: Restored SaveSlotSelector visibility")
 	
-	# Emit signal to trigger save
-	print("SaveSlotManager: Emitting slot_selected signal")
-	slot_selected.emit(slot_number)
+	# Emit signal to trigger save/load based on mode
+	print("SaveSlotManager: Emitting load_requested signal")
+	load_requested.emit(slot_number)
 
 func _on_confirmation_cancelled() -> void:
 	"""Handle confirmation dialog cancelled"""
@@ -281,9 +281,22 @@ func _on_background_clicked(event: InputEvent) -> void:
 
 # New action button functions
 func _on_load_pressed() -> void:
-	"""Handle Load button press"""
+	"""Handle Load button press (repurposed for Save/New Game in other modes)"""
 	if selected_slot > 0:
-		load_requested.emit(selected_slot)
+		if mode == "load":
+			# In load mode, directly emit load_requested
+			load_requested.emit(selected_slot)
+		elif mode == "save" or mode == "new_game":
+			# In save or new_game mode, check if slot has existing data
+			var slot_info = Global.get_slot_info(selected_slot)
+			var is_empty = slot_info.get("empty", true)
+			
+			if not is_empty:
+				# Slot has existing data, show overwrite confirmation
+				_show_overwrite_confirmation(selected_slot, slot_info)
+			else:
+				# Slot is empty, proceed directly
+				load_requested.emit(selected_slot)
 
 func _on_delete_pressed() -> void:
 	"""Handle Delete button press"""

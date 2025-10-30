@@ -101,11 +101,11 @@ func _handle_stamina_restoration(delta: float) -> void:
 	# Restore stamina at the configured rate
 	if restoration_timer >= restoration_interval:
 		var restore_amount = restoration_rate * restoration_interval
-		var old_stamina = current_stamina
+		var _old_stamina = current_stamina
 		current_stamina += int(restore_amount)
 		current_stamina = min(current_stamina, max_stamina)
 		
-		print("Stamina: Restoring ", int(restore_amount), " stamina (", old_stamina, " -> ", current_stamina, ")")
+		# Debug output removed to reduce console spam
 
 		stamina_changed.emit(current_stamina, max_stamina)
 

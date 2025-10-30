@@ -1,0 +1,131 @@
+[gd_scene load_steps=4 format=3 uid="uid://dadwt5cfnway8"]
+
+[ext_resource type="Script" uid="uid://c4jhankyx10pe" path="res://scripts/ui/CraftingMenu.gd" id="1_crafting_menu"]
+[ext_resource type="Texture2D" uid="uid://b3lwfw5xw56jk" path="res://assets/UI_Brown.png" id="2_qb2k3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_recipe_template"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="CraftingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_crafting_menu")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qb2k3")
+region_rect = Rect2(16, 16, 64, 62)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="CraftingMenuArea" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="NinePatchRect/MarginContainer/CraftingMenuArea"]
+layout_mode = 2
+text = "Crafting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="NinePatchRect/MarginContainer/CraftingMenuArea"]
+layout_mode = 2
+
+[node name="ContentContainer" type="Control" parent="NinePatchRect/MarginContainer/CraftingMenuArea"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+collapsed = true
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="RecipesContainer" type="ScrollContainer" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecipeTemplate" type="Panel" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer/VBoxContainer"]
+custom_minimum_size = Vector2(210, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_recipe_template")
+
+[node name="RecipeVBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer/VBoxContainer/RecipeTemplate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecipeTitle" type="Label" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer/VBoxContainer/RecipeTemplate/RecipeVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Recipe Title"
+
+[node name="MaterialsLabel" type="Label" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer/VBoxContainer/RecipeTemplate/RecipeVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Materials: ???"
+
+[node name="CraftButton" type="Button" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer/RecipesContainer/VBoxContainer/RecipeTemplate/RecipeVBox"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+text = "Craft"
+
+[node name="MaterialsDisplay" type="VBoxContainer" parent="NinePatchRect/MarginContainer/CraftingMenuArea/ContentContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HSeparator2" type="HSeparator" parent="NinePatchRect/MarginContainer/CraftingMenuArea"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="NinePatchRect/MarginContainer/CraftingMenuArea"]
+layout_mode = 2
+text = "Close"

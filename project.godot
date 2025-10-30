@@ -34,6 +34,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/canvas_textures/default_texture_filter=0
 
+[gui]
+
+theme/custom_font="uid://dirhas125o63y"
+
 [layer_names]
 
 2d_physics/layer_1="Walls"

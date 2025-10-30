@@ -4,7 +4,7 @@ extends Node
 const SAVE_DEFAULTS = {
 	"inventory_capacity": 200,
 	"inventory_used": 0,
-	"inventory_credits": 0
+	"inventory_credits": 100
 }
 
 # Inventory settings

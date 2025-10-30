@@ -9,6 +9,7 @@ radius = 24.9991
 height = 100.03
 
 [node name="JunkPile2" type="Area2D"]
+y_sort_enabled = true
 script = ExtResource("1_mdcql")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

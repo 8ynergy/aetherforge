@@ -85,7 +85,7 @@ func _connect_to_stamina() -> void:
 
 func _on_stamina_changed(current: int, max_stamina: int) -> void:
 	"""Update stamina bar when stamina changes"""
-	print("StaminaBar: Received stamina_changed signal - ", current, "/", max_stamina)
+	# Debug output removed to reduce console spam
 	_update_stamina_display(current, max_stamina)
 
 func _on_stamina_depleted() -> void:
@@ -110,32 +110,36 @@ func _on_restoration_stopped() -> void:
 	"""Handle stamina restoration stopped"""
 	print("Stamina restoration stopped")
 	is_restoring = false
-	# Remove restoration visual indicator
-	if stamina_bar and not is_low_stamina:
-		stamina_bar.modulate = Color.WHITE
+	# Remove restoration visual indicator and set appropriate color
+	if stamina_bar:
+		# Re-evaluate the color based on current stamina level
+		var current = Stamina.get_current_stamina()
+		var max_stamina = Stamina.get_max_stamina()
+		if current <= max_stamina * low_stamina_threshold:
+			stamina_bar.modulate = Color.RED
+		else:
+			stamina_bar.modulate = Color.WHITE
 
 func _update_stamina_display(current: int, max_stamina: int) -> void:
 	"""Update the stamina bar and label display"""
-	print("StaminaBar: Updating display - ", current, "/", max_stamina)
-	print("StaminaBar: stamina_bar reference is null: ", stamina_bar == null)
+	# Debug output removed to reduce console spam
 	if stamina_bar:
 		# Set the max_value to match the actual max stamina
 		stamina_bar.max_value = max_stamina
 		# Set the current value directly (not as percentage)
 		stamina_bar.value = current
-		print("StaminaBar: Set max_value=", max_stamina, ", value=", current)
+		# Debug output removed to reduce console spam
+		
+		# Update low stamina state
+		is_low_stamina = current <= max_stamina * low_stamina_threshold
 		
 		# Change color based on stamina level and restoration state
 		if is_restoring:
 			stamina_bar.modulate = Color.CYAN
-		elif current <= max_stamina * low_stamina_threshold:
-			if not is_low_stamina:
-				is_low_stamina = true
-				stamina_bar.modulate = Color.RED
+		elif is_low_stamina:
+			stamina_bar.modulate = Color.RED
 		else:
-			if is_low_stamina:
-				is_low_stamina = false
-				stamina_bar.modulate = Color.WHITE
+			stamina_bar.modulate = Color.WHITE
 	else:
 		print("StaminaBar: ERROR - stamina_bar is null!")
 	

@@ -22,15 +22,16 @@ curve = SubResource("Curve_0ftqc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2jfc"]
 lifetime_randomness = 1.0
+particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(1, 1, 0)
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 0.5
 angle_curve = SubResource("CurveTexture_drhq0")
 direction = Vector3(0, 0, 0)
 spread = 360.0
 initial_velocity_min = 200.0
-initial_velocity_max = 500.0
+initial_velocity_max = 400.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 angular_velocity_curve = SubResource("CurveTexture_3sac4")
@@ -42,7 +43,6 @@ radial_accel_max = 3.0
 damping_min = 600.0
 damping_max = 900.0
 scale_min = 0.75
-scale_max = 1.25
 
 [node name="ClickParticleEffect" type="GPUParticles2D"]
 emitting = false

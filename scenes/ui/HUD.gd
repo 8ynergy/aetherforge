@@ -1,7 +1,7 @@
 extends Control
 
 # UI references
-@onready var credits_label: Label = $MarginTop/HUDTop/CreditsLabel
+@onready var credits_label: Label = $MarginTop/HUDTopLeft/NinePatchRect/MarginContainer/CreditsLabel
 @onready var resources_btn: MenuButton = $MarginBottom/HUDBottom/ResourcesButton
 @onready var smelt_btn: Button = $SmeltButton
 @onready var buy_drone_btn: Button = $BuyDroneButton
@@ -13,6 +13,7 @@ var menu_instance: Control = null
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE  # Allow clicks to pass through to world objects
 	
+	
 	# Connect button signals
 	if smelt_btn:
 		smelt_btn.pressed.connect(_on_smelt_pressed)
@@ -22,6 +23,16 @@ func _ready() -> void:
 		menu_btn.pressed.connect(_on_menu_pressed)
 	if resources_btn:
 		resources_btn.about_to_popup.connect(_on_resources_menu_about_to_popup)
+		# Also connect to the popup's about_to_popup signal for positioning
+		var popup = resources_btn.get_popup()
+		popup.about_to_popup.connect(_on_resources_popup_positioning)
+	
+	# Connect to Inventory signals with a delay to ensure it's ready
+	await get_tree().process_frame
+	
+	if Inventory:
+		Inventory.inventory_changed.connect(_on_inventory_changed)
+	
 	_refresh_all()
 
 func _input(event):
@@ -70,8 +81,10 @@ func _on_inventory_changed(_id: String, _qty: int) -> void:
 	_refresh_all()
 
 func _refresh_all() -> void:
-	if Inventory.has_method("get_credits") and credits_label:
-		credits_label.text = "Credits: %d" % int(Inventory.call("get_credits"))
+	if Inventory and credits_label:
+		var credits = Inventory.get_credits()
+		credits_label.text = "Credits: %d" % credits
+		
 
 func _on_resources_menu_about_to_popup():
 	if not Inventory:
@@ -100,6 +113,12 @@ func _on_resources_menu_about_to_popup():
 		var qty = Inventory.get_qty(resource_id)
 		var display_name = resource_id.replace("_", " ").capitalize()
 		popup.add_item("%s: %d" % [display_name, qty])
+
+func _on_resources_popup_positioning():
+	# Position popup to the right of button + 4px margin
+	var button_rect = resources_btn.get_global_rect()
+	var popup = resources_btn.get_popup()
+	popup.position = Vector2(button_rect.position.x + button_rect.size.x + 4, button_rect.position.y)
 		
 func _format_resource_name(resource_id: String) -> String:
 	# Convert snake_case to Title Case

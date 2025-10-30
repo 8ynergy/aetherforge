@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1yep3kifh3bb"
-path="res://.godot/imported/JunkWallRight.png-5df3cf2cfaa098a9307073126bdbbda9.ctex"
+uid="uid://s3lkmk71su5s"
+path="res://.godot/imported/CarWreckGrey.png-800848bfae11970feb4102989bf77590.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/JunkWallRight.png"
-dest_files=["res://.godot/imported/JunkWallRight.png-5df3cf2cfaa098a9307073126bdbbda9.ctex"]
+source_file="res://assets/JunkYard/CarWreckGrey.png"
+dest_files=["res://.godot/imported/CarWreckGrey.png-800848bfae11970feb4102989bf77590.ctex"]
 
 [params]
 

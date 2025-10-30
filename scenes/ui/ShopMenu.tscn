@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgcqisd34np14"]
+
+[ext_resource type="Script" uid="uid://cqcsk2dd61sfq" path="res://scripts/ui/ShopMenu.gd" id="1_shop_menu"]
+[ext_resource type="Texture2D" uid="uid://b3lwfw5xw56jk" path="res://assets/UI_Brown.png" id="2_tv35j"]
+
+[node name="ShopMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop_menu")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tv35j")
+region_rect = Rect2(16, 16, 64, 62)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginShopMenu" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ShopMenuArea" type="VBoxContainer" parent="NinePatchRect/MarginShopMenu"]
+layout_mode = 2
+
+[node name="ShopTitle" type="Label" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopTitleSeparator" type="HSeparator" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+
+[node name="MarginShopItemsArea" type="MarginContainer" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ContentContainer" type="Control" parent="NinePatchRect/MarginShopMenu/ShopMenuArea/MarginShopItemsArea"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsContainer" type="VBoxContainer" parent="NinePatchRect/MarginShopMenu/ShopMenuArea/MarginShopItemsArea/ContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopItemsRow1" type="HBoxContainer" parent="NinePatchRect/MarginShopMenu/ShopMenuArea/MarginShopItemsArea/ContentContainer/ItemsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsDisplay" type="Label" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+text = "Credits: 0"
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginShopMenu/ShopMenuArea"]
+layout_mode = 2
+
+[node name="RefreshButton" type="Button" parent="NinePatchRect/MarginShopMenu/ShopMenuArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Refresh (5)"
+
+[node name="CloseButton" type="Button" parent="NinePatchRect/MarginShopMenu/ShopMenuArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
+

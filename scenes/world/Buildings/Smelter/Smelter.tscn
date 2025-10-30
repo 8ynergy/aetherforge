@@ -1,11 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgxu4xecgkssw"]
+[gd_scene load_steps=6 format=3 uid="uid://dgxu4xecgkssw"]
 
-[ext_resource type="Script" uid="uid://cb8d8ykiyoj34" path="res://scenes/world/Buildings/Smelter/SmelterSystem.gd" id="1_1itvp"]
-[ext_resource type="Texture2D" uid="uid://c0sivvjalc3q4" path="res://scenes/world/Buildings/Smelter/SmelterV2.png" id="2_gu0sh"]
+[ext_resource type="Script" uid="uid://dal2gg4rstjuk" path="res://scenes/world/Buildings/Smelter/Smelter.gd" id="1_smelter"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="2_i15ef"]
+[ext_resource type="Script" uid="uid://cb8d8ykiyoj34" path="res://scenes/world/Buildings/Smelter/SmelterSystem.gd" id="2_smelter_system"]
+[ext_resource type="Texture2D" uid="uid://c0sivvjalc3q4" path="res://scenes/world/Buildings/Smelter/SmelterV2.png" id="3_smelter_texture"]
 
-[node name="Smelter" type="Node2D"]
-script = ExtResource("1_1itvp")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smelter"]
+size = Vector2(78, 102)
+
+[node name="Smelter" type="Area2D"]
+script = ExtResource("1_smelter")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_gu0sh")
+material = ExtResource("2_i15ef")
+texture = ExtResource("3_smelter_texture")
 offset = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_smelter")
+
+[node name="SmelterSystem" type="Node" parent="."]
+script = ExtResource("2_smelter_system")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

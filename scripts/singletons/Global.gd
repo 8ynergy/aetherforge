@@ -12,6 +12,7 @@ const SAVE_PATH := SaveSettings.SAVE_PATH
 var current_save_slot: int = 1
 var game_start_time: float = 0.0
 var session_start_time: float = 0.0
+var is_new_game_session: bool = false
 
 # Cave level system
 var current_cave_level: int = 1
@@ -184,9 +185,25 @@ func save_to_slot(slot_number: int) -> void:
 			existing_playtime = existing_metadata.get(SaveSettings.METADATA_KEYS.playtime, 0)
 			first_play_date = existing_metadata.get(SaveSettings.METADATA_KEYS.first_play_date, "")
 	
-	# Add current session time to existing playtime
+	# Calculate playtime based on whether this is a new game or continuing existing game
 	var session_playtime = current_time - session_start_time
-	var total_playtime = existing_playtime + int(session_playtime)
+	var total_playtime: int
+	
+	# Check if this is a new game session
+	if is_new_game_session:
+		# This is a new game - use only the current session time
+		total_playtime = int(session_playtime)
+		print("Global: New game detected - using fresh playtime: ", total_playtime)
+		# Clear the flag after first save
+		is_new_game_session = false
+	else:
+		# This is continuing an existing game - add session time to existing playtime
+		total_playtime = existing_playtime + int(session_playtime)
+		print("Global: Continuing existing game - total playtime: ", total_playtime)
+	
+	# Reset session timer after saving to prevent accumulation on subsequent saves
+	session_start_time = current_time
+	print("Global: Session timer reset to prevent accumulation")
 	
 	# Create metadata with local time in readable format
 	var local_time = Time.get_datetime_dict_from_system(false)  # false = local time, not UTC
@@ -283,9 +300,11 @@ func load_from_slot(slot_number: int) -> void:
 		print("Invalid save file format in slot ", slot_number)
 		return
 	
-	# Set current slot and reset session timer
+	# Set current slot and reset timers for loaded game
 	current_save_slot = slot_number
 	session_start_time = Time.get_unix_time_from_system()  # Reset session timer when loading
+	game_start_time = Time.get_unix_time_from_system()  # Reset game start time for loaded game
+	is_new_game_session = false  # This is continuing an existing game
 	
 	# Load game data
 	var game_data = data.get(SaveSettings.SAVE_KEYS.game_data, {})
@@ -350,8 +369,10 @@ func get_current_scene_name() -> String:
 
 func reset_game_data() -> void:
 	"""Reset all game data for a new game"""
-	# Reset game start time
+	# Reset game start time and session start time for new game
 	game_start_time = Time.get_unix_time_from_system()
+	session_start_time = Time.get_unix_time_from_system()
+	is_new_game_session = true
 	
 	# Reset inventory if it exists
 	if Inventory:

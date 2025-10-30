@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5080jxbs7qcs"
-path="res://.godot/imported/JunkWall.png-c39c24142510a8d414ed4013cb98874a.ctex"
+uid="uid://b1yep3kifh3bb"
+path="res://.godot/imported/JunkWallRight.png-cd885005034ff03b1288899b7854cd52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/JunkWall.png"
-dest_files=["res://.godot/imported/JunkWall.png-c39c24142510a8d414ed4013cb98874a.ctex"]
+source_file="res://assets/JunkYard/JunkWallRight.png"
+dest_files=["res://.godot/imported/JunkWallRight.png-cd885005034ff03b1288899b7854cd52.ctex"]
 
 [params]
 

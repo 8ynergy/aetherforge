@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyqdhqv228pwo"]
+
+[ext_resource type="Script" uid="uid://cgxfk0rbbgk4t" path="res://scenes/world/Signs/BackToCamp.gd" id="1_6g0gi"]
+[ext_resource type="Texture2D" uid="uid://dgu0o21quya1h" path="res://scenes/world/Signs/SignLong.png" id="1_a46cj"]
+[ext_resource type="Material" uid="uid://rtn2ess0qjq5" path="res://scenes/ui/OnHoverMat.tres" id="2_4d2he"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_788dw"]
+size = Vector2(28, 53)
+
+[node name="BackToCamp" type="Area2D"]
+script = ExtResource("1_6g0gi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_4d2he")
+texture = ExtResource("1_a46cj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_788dw")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
